@@ -128,6 +128,70 @@
             margin: 10px 0;
             border: 1px solid #ddd;
         }
+        #confirm-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            z-index: 10;
+            padding: 20px;
+            text-align: center;
+        }
+        #confirm-page .header {
+            background-color: #ffd700;
+            padding: 10px;
+        }
+        .confirm-text {
+            margin: 20px 0;
+            font-size: 16px;
+        }
+        .confirm-btn {
+            background-color: #ffd700;
+            color: #000;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #success-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            z-index: 11;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .success-animation {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff0000; /* Starting color */
+            animation: color-change 2s infinite;
+        }
+        @keyframes color-change {
+            0% { color: #ff0000; }
+            25% { color: #00ff00; }
+            50% { color: #0000ff; }
+            75% { color: #ffff00; }
+            100% { color: #ff0000; }
+        }
+        .back-btn {
+            background-color: #ffd700;
+            color: #000;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -152,29 +216,26 @@
         <input type="text" class="account-input" value="335258xxx05">
         <div class="amount-label">राशि</div>
         <div class="amount-grid">
-            <div class="amount-btn">₹10</div>
+            <div class="amount-btn">₹199</div>
+            <div class="amount-btn">₹399</div>
+            <div class="amount-btn">₹99</div>
             <div class="amount-btn">₹20</div>
-            <div class="amount-btn">₹50</div>
-            <div class="amount-btn">₹100</div>
-            <div class="amount-btn">₹500</div>
-            <div class="amount-btn">₹2000</div>
+            <div class="amount-btn">₹299</div>
         </div>
         <div class="note">अपना पैसा 30 मिनट के भीतर आपके अकाउंट में आए दिया जाएगा। कृपया समय पर अकाउंट visa निकालें!</div>
         <div class="withdraw-btn" onclick="alert('Withdrawal Successful!')">पेसा निकालें</div>
     </div>
     <div id="bank" class="tab-content hidden">
-        <!-- Similar to Paytm, customize if needed -->
         <div class="edit">• Edit</div>
         <div>Bank Account</div>
         <input type="text" class="account-input" placeholder="Enter Bank Details">
         <div class="amount-label">राशि</div>
         <div class="amount-grid">
-            <div class="amount-btn">₹10</div>
+            <div class="amount-btn">₹199</div>
+            <div class="amount-btn">₹399</div>
+            <div class="amount-btn">₹99</div>
             <div class="amount-btn">₹20</div>
-            <div class="amount-btn">₹50</div>
-            <div class="amount-btn">₹100</div>
-            <div class="amount-btn">₹500</div>
-            <div class="amount-btn">₹2000</div>
+            <div class="amount-btn">₹299</div>
         </div>
         <div class="note">अपना पैसा 30 मिनट के भीतर आपके अकाउंट में आए दिया जाएगा। कृपया समय पर अकाउंट visa निकालें!</div>
         <div class="withdraw-btn" onclick="alert('Withdrawal Successful!')">पेसा निकालें</div>
@@ -192,15 +253,14 @@
         </select>
         <div class="amount-label">राशि</div>
         <div class="amount-grid">
-            <div class="amount-btn">₹10</div>
+            <div class="amount-btn">₹199</div>
+            <div class="amount-btn">₹399</div>
+            <div class="amount-btn">₹99</div>
             <div class="amount-btn">₹20</div>
-            <div class="amount-btn">₹50</div>
-            <div class="amount-btn">₹100</div>
-            <div class="amount-btn">₹500</div>
-            <div class="amount-btn">₹2000</div>
+            <div class="amount-btn">₹299</div>
         </div>
         <div class="note">अपना पैसा 30 मिनट के भीतर आपके अकाउंट में आए दिया जाएगा। कृपया समय पर अकाउंट visa निकालें!</div>
-        <div class="withdraw-btn" onclick="alert('Recharge Successful!')">Recharge Now</div>
+        <div class="withdraw-btn" onclick="showConfirmPage()">Recharge Now</div>
     </div>
     <div class="bottom-nav">
         <div class="nav-item">Play</div>
@@ -209,6 +269,21 @@
         <div class="nav-item">Free Earn</div>
         <div class="nav-item">₹ Wallet</div>
         <div class="nav-item">Watch Videos Free Money</div>
+    </div>
+
+    <!-- Confirm Page -->
+    <div id="confirm-page" class="hidden">
+        <div class="header">
+            <div>Confirm Recharge</div>
+        </div>
+        <div class="confirm-text">रिचार्ज करने के लिए कन्फर्म करें Free</div>
+        <div class="confirm-btn" onclick="showSuccessPage()">Confirm</div>
+    </div>
+
+    <!-- Success Page with Animation -->
+    <div id="success-page" class="hidden">
+        <div class="success-animation">Your Free Rs.199 Recharge Successfully Activate Within 15 min</div>
+        <div class="back-btn" onclick="backToHome()">Back to Home Page</div>
     </div>
 
     <script>
@@ -224,6 +299,20 @@
                 tabLinks[i].classList.remove('active');
             }
             event.currentTarget.classList.add('active');
+        }
+
+        function showConfirmPage() {
+            document.getElementById('confirm-page').classList.remove('hidden');
+        }
+
+        function showSuccessPage() {
+            document.getElementById('confirm-page').classList.add('hidden');
+            document.getElementById('success-page').classList.remove('hidden');
+        }
+
+        function backToHome() {
+            document.getElementById('success-page').classList.add('hidden');
+            // Optionally reset to main page or recharge tab
         }
     </script>
 </body>
