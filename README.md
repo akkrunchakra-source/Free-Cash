@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
@@ -312,6 +313,11 @@
 
         function backToHome() {
             document.getElementById('success-page').classList.add('hidden');
+            // Optionally reset to main page or recharge tab
+        }
+    </script>
+</body>
+</html>ementById('success-page').classList.add('hidden');
             // Optionally reset to main page or recharge tab
         }
     </script>
