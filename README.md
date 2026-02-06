@@ -1,156 +1,170 @@
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Withdraw Demo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fff;
-            color: #000;
-        }
-        .header {
-            background-color: #ffd700;
-            padding: 10px;
-            text-align: center;
-            position: relative;
-        }
-        .back-arrow {
-            position: absolute;
-            left: 10px;
-            top: 15px;
-            font-size: 20px;
-        }
-        .balance {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .earning-cash {
-            font-size: 12px;
-        }
-        .my-withdrawal {
-            position: absolute;
-            right: 10px;
-            top: 20px;
-            font-size: 14px;
-            color: blue;
-        }
-        .notification {
-            background-color: #fff;
-            padding: 10px;
-            text-align: center;
-            font-size: 14px;
-            color: #ff8c00;
-        }
-        .bell-icon {
-            color: #ff8c00;
-        }
-        .tabs {
-            display: flex;
-            justify-content: space-around;
-            background-color: #fff;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        .tab {
-            cursor: pointer;
-            padding: 10px;
-            font-weight: bold;
-        }
-        .tab.active {
-            border-bottom: 2px solid #ffd700;
-        }
-        .tab-content {
-            padding: 20px;
-        }
-        .hidden {
-            display: none;
-        }
-        .edit {
-            color: green;
-            font-size: 12px;
-        }
-        .account-input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-        }
-        .amount-label {
-            font-size: 16px;
-            margin: 10px 0;
-        }
-        .amount-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-        .amount-btn {
-            background-color: #f5f5f5;
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-            cursor: pointer;
-        }
-        .note {
-            font-size: 12px;
-            color: #666;
-            margin: 20px 0;
-        }
-        .withdraw-btn {
-            background-color: #ffd700;
-            color: #000;
-            padding: 15px;
-            text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            background-color: #fff;
-            padding: 10px;
-            border-top: 1px solid #ddd;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        .nav-item {
-            text-align: center;
-            font-size: 12px;
-        }
-        .select-operator {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Cash</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#000;
+}
+
+/* ---------- SIGNUP PAGE ---------- */
+#signup{
+    min-height:100vh;
+    background:#000;
+    color:#fff;
+    padding:20px;
+}
+.signup-box{
+    margin-top:40px;
+}
+.signup-box h2{
+    font-size:22px;
+    margin-bottom:20px;
+}
+.signup-box input{
+    width:100%;
+    padding:14px;
+    margin:10px 0;
+    background:#222;
+    border:none;
+    border-radius:8px;
+    color:#fff;
+}
+.signup-btn{
+    width:100%;
+    padding:16px;
+    margin-top:20px;
+    background:#2b2b2b;
+    color:#fff;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+}
+.agree{
+    margin-top:20px;
+    font-size:13px;
+    color:#aaa;
+}
+.agree span{
+    color:red;
+}
+
+/* ---------- WITHDRAW PAGE ---------- */
+#withdraw{
+    display:none;
+    background:#fff;
+    color:#000;
+    min-height:100vh;
+}
+.header{
+    background:#ffd700;
+    padding:12px;
+    text-align:center;
+    position:relative;
+}
+.balance{
+    font-size:24px;
+    font-weight:bold;
+}
+.notification{
+    padding:10px;
+    text-align:center;
+    color:#ff8c00;
+}
+.tabs{
+    display:flex;
+    justify-content:space-around;
+    border-bottom:1px solid #ddd;
+}
+.tab{
+    padding:10px;
+    cursor:pointer;
+    font-weight:bold;
+}
+.tab.active{
+    border-bottom:2px solid #ffd700;
+}
+.tab-content{
+    padding:15px;
+}
+.hidden{display:none;}
+.account-input, select{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+.amount-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+.amount-btn{
+    padding:10px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+.withdraw-btn{
+    background:#ffd700;
+    padding:15px;
+    text-align:center;
+    font-weight:bold;
+    margin-top:15px;
+}
+.bottom-nav{
+    display:flex;
+    justify-content:space-around;
+    border-top:1px solid #ddd;
+    padding:10px;
+    font-size:12px;
+}
+</style>
 </head>
+
 <body>
+
+<!-- ================= SIGNUP SCREEN ================= -->
+<div id="signup">
+    <div class="signup-box">
+        <h2>कमाना शुरू करने के लिए<br>अपना account बनाओ!</h2>
+
+        <input type="tel" placeholder="+91 Phone">
+        <input type="password" placeholder="Password डालो">
+        <input type="text" placeholder="Invitation Code">
+        <input type="text" placeholder="Verify Code">
+
+        <button class="signup-btn" onclick="goWithdraw()">Account बनाओ</button>
+
+        <div class="agree">
+            ● मैं agree करता हूँ <span>Terms of Service</span> and <span>Privacy Policy</span>
+        </div>
+    </div>
+</div>
+
+<!-- ================= WITHDRAW SCREEN ================= -->
+<div id="withdraw">
+
     <div class="header">
-        <div class="back-arrow">&lt;</div>
         <div>Withdraw</div>
         <div class="balance">₹517.32</div>
-        <div class="earning-cash">Earning cash</div>
-        <div class="my-withdrawal">My Withdrawal</div>
+        <div>Earning cash</div>
     </div>
-    <div class="notification">
-        <span class="bell-icon">🔔</span> रोज ₹20 से लेकर ₹1000 निकाल सकते हैं
-    </div>
+
+    <div class="notification">🔔 रोज ₹20 से लेकर ₹1000 निकाल सकते हैं</div>
+
     <div class="tabs">
-        <div class="tab active" onclick="openTab('paytm')">Paytm</div>
-        <div class="tab" onclick="openTab('bank')">BANK</div>
-        <div class="tab" onclick="openTab('recharge')">MOBILE Recharge</div>
+        <div class="tab active" onclick="openTab('paytm',this)">Paytm</div>
+        <div class="tab" onclick="openTab('bank',this)">BANK</div>
+        <div class="tab" onclick="openTab('recharge',this)">MOBILE Recharge</div>
     </div>
+
     <div id="paytm" class="tab-content">
-        <div class="edit">• Edit</div>
-        <div>मेरा अकाउंट नंबर</div>
-        <input type="text" class="account-input" value="335258xxx05">
-        <div class="amount-label">राशि</div>
+        <input class="account-input" value="335258xxx05">
         <div class="amount-grid">
             <div class="amount-btn">₹10</div>
             <div class="amount-btn">₹20</div>
@@ -159,72 +173,47 @@
             <div class="amount-btn">₹500</div>
             <div class="amount-btn">₹2000</div>
         </div>
-        <div class="note">अपना पैसा 30 मिनट के भीतर आपके अकाउंट में आए दिया जाएगा। कृपया समय पर अकाउंट visa निकालें!</div>
-        <div class="withdraw-btn" onclick="alert('Withdrawal Successful!')">पेसा निकालें</div>
+        <div class="withdraw-btn">पैसा निकालें</div>
     </div>
+
     <div id="bank" class="tab-content hidden">
-        <!-- Similar to Paytm, customize if needed -->
-        <div class="edit">• Edit</div>
-        <div>Bank Account</div>
-        <input type="text" class="account-input" placeholder="Enter Bank Details">
-        <div class="amount-label">राशि</div>
-        <div class="amount-grid">
-            <div class="amount-btn">₹10</div>
-            <div class="amount-btn">₹20</div>
-            <div class="amount-btn">₹50</div>
-            <div class="amount-btn">₹100</div>
-            <div class="amount-btn">₹500</div>
-            <div class="amount-btn">₹2000</div>
-        </div>
-        <div class="note">अपना पैसा 30 मिनट के भीतर आपके अकाउंट में आए दिया जाएगा। कृपया समय पर अकाउंट visa निकालें!</div>
-        <div class="withdraw-btn" onclick="alert('Withdrawal Successful!')">पेसा निकालें</div>
+        <input class="account-input" placeholder="Bank Account">
+        <div class="withdraw-btn">पैसा निकालें</div>
     </div>
+
     <div id="recharge" class="tab-content hidden">
-        <div>मोबाइल नंबर</div>
-        <input type="text" class="account-input" placeholder="Enter Mobile Number">
-        <div>सिम चुनें</div>
-        <select class="select-operator">
+        <input class="account-input" placeholder="Mobile Number">
+        <select>
             <option>Jio</option>
             <option>Airtel</option>
             <option>Vodafone</option>
-            <option>BSNL</option>
-            <option>Other</option>
         </select>
-        <div class="amount-label">राशि</div>
-        <div class="amount-grid">
-            <div class="amount-btn">₹10</div>
-            <div class="amount-btn">₹20</div>
-            <div class="amount-btn">₹50</div>
-            <div class="amount-btn">₹100</div>
-            <div class="amount-btn">₹500</div>
-            <div class="amount-btn">₹2000</div>
-        </div>
-        <div class="note">अपना पैसा 30 मिनट के भीतर आपके अकाउंट में आए दिया जाएगा। कृपया समय पर अकाउंट visa निकालें!</div>
-        <div class="withdraw-btn" onclick="alert('Recharge Successful!')">Recharge Now</div>
+        <div class="withdraw-btn">Recharge Now</div>
     </div>
+
     <div class="bottom-nav">
-        <div class="nav-item">Play</div>
-        <div class="nav-item">Daily</div>
-        <div class="nav-item">NEW</div>
-        <div class="nav-item">Free Earn</div>
-        <div class="nav-item">₹ Wallet</div>
-        <div class="nav-item">Watch Videos Free Money</div>
+        <div>Play</div>
+        <div>Daily</div>
+        <div>NEW</div>
+        <div>Free Earn</div>
+        <div>₹ Wallet</div>
     </div>
+</div>
 
-    <script>
-        function openTab(tabName) {
-            var tabs = document.getElementsByClassName('tab-content');
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].classList.add('hidden');
-            }
-            document.getElementById(tabName).classList.remove('hidden');
+<script>
+function goWithdraw(){
+    document.getElementById("signup").style.display="none";
+    document.getElementById("withdraw").style.display="block";
+}
 
-            var tabLinks = document.getElementsByClassName('tab');
-            for (var i = 0; i < tabLinks.length; i++) {
-                tabLinks[i].classList.remove('active');
-            }
-            event.currentTarget.classList.add('active');
-        }
-    </script>
+function openTab(id,el){
+    document.querySelectorAll(".tab-content").forEach(t=>t.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
+
+    document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+    el.classList.add("active");
+}
+</script>
+
 </body>
 </html>
