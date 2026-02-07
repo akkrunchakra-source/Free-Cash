@@ -167,7 +167,8 @@ input,select{
 
 <!-- SIGNUP -->
 <div id="signup" class="screen">
-    <h2>Free Reacharge Data कमाने के लिए<br>Sign-Up करें! (Free Bonus ₹180 मुफ्त!)</h2>
+    <h2>Free Reacharge Data कमाने के लिए<br>Sign-Up करें! 
+(Free Bonus ₹180 मुफ्त!)</h2>
     <input placeholder="+91 Phone">
     <input type="password" placeholder="Password डालो">
     <input placeholder="Invitation Code">
