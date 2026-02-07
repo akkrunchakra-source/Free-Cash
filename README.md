@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo Wallet Platform</title>
+<title>Wallet Platform</title>
 
 <style>
 *{box-sizing:border-box;}
@@ -146,12 +146,12 @@ input,select{
 
 <!-- SIGNUP -->
 <div id="signup" class="screen">
-    <h2>Demo Wallet Sign-Up</h2>
+    <h2>पैसे कमाने के लिए और अधिक Free Mobile DATA Earn के लिए अपना Account Sign-Up करें!</h2>
     <input placeholder="+91 Phone">
     <input type="password" placeholder="Password">
     <input placeholder="Referral Code">
     <input placeholder="Verify Code">
-    <button class="signup-btn" onclick="showSignupPopup()">Signup</button>
+    <button class="signup-btn" onclick="showSignupPopup()">Sign-up Here</button>
 </div>
 
 <!-- WALLET -->
@@ -195,7 +195,7 @@ input,select{
 <!-- SIGNUP BONUS POPUP -->
 <div id="signupPopup" class="popup-bg">
     <div class="popup-box">
-        <b>Signup Bonus Unlocked</b><br><br>
+        <b>Signup Bonus ₹180 Unlocked</b><br><br>
         You can now use wallet features.<br>
         <button onclick="goWithdraw()">OK</button>
     </div>
