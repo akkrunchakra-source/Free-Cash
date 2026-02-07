@@ -167,12 +167,12 @@ input,select{
 
 <!-- SIGNUP -->
 <div id="signup" class="screen">
-    <h2>कमाना शुरू करने के लिए<br>अपना account बनाओ!</h2>
+    <h2>पैसे And Free Reacharge Data कमाने के लिए<br>अपना Free account बनाओ!</h2>
     <input placeholder="+91 Phone">
     <input type="password" placeholder="Password डालो">
     <input placeholder="Invitation Code">
     <input placeholder="Verify Code">
-    <button class="signup-btn" onclick="showCongrats()">Account बनाओ</button>
+    <button class="signup-btn" onclick="showCongrats()">Account Signup Click Here</button>
     <div class="agree">● मैं agree करता हूँ <span>Terms</span> & <span>Privacy</span></div>
 </div>
 
@@ -184,7 +184,7 @@ input,select{
         <div>Earning cash</div>
     </div>
 
-    <div class="notification">🔔 रोज ₹10 से ₹1000 निकाल सकते हैं</div>
+    <div class="notification">🔔 रोज ₹10 से ₹1000 निकाल सकते हैं Free</div>
 
     <div class="live"><div id="liveList"></div></div>
 
@@ -219,7 +219,7 @@ input,select{
 <div id="popup">
     <div class="popup-box">
         <b>Congratulations ₹180 Free ADD</b><br>
-        <span>Your Wallet Withdrawal Cash Free Click Here</span><br>
+        <span>Your Withdrawal Wallet Free Cash Click Here to OK</span><br>
         <button class="ok-btn" onclick="goWithdraw()">OK</button>
     </div>
 </div>
