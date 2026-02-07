@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
@@ -73,7 +74,6 @@ input,select{
     margin:6px 0;
 }
 
-/* AMOUNT */
 .amount-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -98,7 +98,6 @@ input,select{
     color:green;
 }
 
-/* BUTTON */
 .withdraw-btn{
     background:#ffd700;
     padding:14px;
@@ -107,12 +106,11 @@ input,select{
     margin-top:10px;
 }
 
-/* ===== LIVE RECHARGE DEMO ===== */
+/* LIVE DEMO */
 .live-box{
     margin-top:15px;
     border-radius:12px;
     overflow:hidden;
-    box-shadow:0 0 10px rgba(0,0,0,0.2);
 }
 
 .live-header{
@@ -125,7 +123,17 @@ input,select{
 
 .live-time{
     font-size:12px;
-    margin-top:3px;
+}
+
+.live-indicator{
+    color:#00ff00;
+    font-weight:bold;
+    animation:liveBlink 1s infinite;
+}
+@keyframes liveBlink{
+    0%{opacity:1;text-shadow:0 0 5px #0f0;}
+    50%{opacity:0.3;text-shadow:0 0 15px #0f0;}
+    100%{opacity:1;text-shadow:0 0 5px #0f0;}
 }
 
 .live-list{
@@ -142,13 +150,12 @@ input,select{
     margin:0;
     position:absolute;
     width:100%;
-    animation:scrollLive 12s linear infinite;
+    animation:scrollLive 6s linear infinite;
 }
 
 .live-list li{
     padding:6px 10px;
     border-bottom:1px solid rgba(255,255,255,0.1);
-    font-size:14px;
 }
 
 @keyframes scrollLive{
@@ -173,12 +180,6 @@ input,select{
     border-radius:12px;
     text-align:center;
     max-width:300px;
-    animation:blink 1s infinite;
-}
-@keyframes blink{
-0%{opacity:1;}
-50%{opacity:0.5;}
-100%{opacity:1;}
 }
 .popup-box button{
     margin-top:15px;
@@ -193,7 +194,6 @@ input,select{
 
 <body>
 
-<!-- SIGNUP -->
 <div id="signup" class="screen">
     <h2>Demo Wallet Sign-Up</h2>
     <input placeholder="+91 Phone">
@@ -203,7 +203,6 @@ input,select{
     <button class="signup-btn" onclick="showSignupPopup()">Signup</button>
 </div>
 
-<!-- WALLET -->
 <div id="withdraw" class="screen">
     <div class="header">
         <div>Wallet Balance</div>
@@ -239,97 +238,107 @@ input,select{
         <div class="withdraw-btn" onclick="showRechargeSuccess()">Recharge Now</div>
     </div>
 
-    <!-- LIVE RECHARGE DEMO -->
+    <!-- LIVE DEMO -->
     <div class="live-box">
         <div class="live-header">
-            Free Mobile Recharge Successfully
-            <div class="live-time">Time 7:30 PM Today</div>
+            Free Mobile Recharge Successfully  
+            <div class="live-indicator">● LIVE</div>
+            <div class="live-time" id="liveClock"></div>
         </div>
 
         <div class="live-list">
-            <ul>
-                <li>Anuj Kumar - 6397****59 / Jio Successfully Recharge</li>
-                <li>Rahul Kumar - 8XXX****21 / Jio Successfully Recharge</li>
-                <li>Annu Sharma - 9XXX****34 / Airtel Successfully Recharge</li>
-                <li>Parul Kha - 7XXX****65 / Jio Successfully Recharge</li>
-                <li>Anil Kumar - 8XXX****77 / Airtel Successfully Recharge</li>
-                <li>Rajat Dhan - 9XXX****88 / Jio Successfully Recharge</li>
-                <li>Gorav Kashyap - 6XXX****55 / Airtel Successfully Recharge</li>
-                <li>Arun Singh - 7XXX****90 / Jio Successfully Recharge</li>
-                <li>Pooja Sharma - 8XXX****44 / Airtel Successfully Recharge</li>
-                <li>Pooja Singh - 9XXX****11 / Jio Successfully Recharge</li>
-                <li>Pihu Pal - 6XXX****66 / Airtel Successfully Recharge</li>
-                <li>Ritika Tanu - 7XXX****22 / Jio Successfully Recharge</li>
-            </ul>
+            <ul id="liveList"></ul>
         </div>
     </div>
 
 </div>
 
-<!-- SIGNUP BONUS POPUP -->
+<!-- POPUPS -->
 <div id="signupPopup" class="popup-bg">
     <div class="popup-box">
-        <b>Signup Bonus Unlocked</b><br><br>
-        You can now use wallet features.<br>
+        Signup Bonus Unlocked<br>
         <button onclick="goWithdraw()">OK</button>
     </div>
 </div>
 
-<!-- RECHARGE SUCCESS -->
 <div id="rechargePopup" class="popup-bg">
     <div class="popup-box">
-        <b>Recharge Successfully Completed</b><br><br>
-        Please wait few minutes.<br>
-        <button onclick="backHome()">Back To Home</button>
+        Recharge Successfully Completed<br>
+        <button onclick="backHome()">Back</button>
     </div>
 </div>
 
-<script>
+<audio id="successSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
 
+<script>
 function setVH(){
  document.documentElement.style.setProperty('--vh', window.innerHeight + 'px');
 }
 setVH(); window.addEventListener('resize', setVH);
 
-function showSignupPopup(){
- document.getElementById("signupPopup").style.display="flex";
+/* CLOCK */
+setInterval(()=>{
+ let now=new Date();
+ document.getElementById("liveClock").innerText=
+ now.toLocaleTimeString();
+},1000);
+
+/* RANDOM LIVE LIST */
+const names=[
+"Rahul Kumar","Annu Sharma","Parul Kha","Anil Kumar",
+"Rajat Dhan","Gorav Kashyap","Arun Singh",
+"Pooja Sharma","Pooja Singh","Pihu Pal","Ritika Tanu"
+];
+
+const operators=["Jio","Airtel"];
+
+function randomNumber(){
+ return Math.floor(6000000000 + Math.random()*3000000000)
+ .toString().replace(/(\d{4})\d{4}(\d{2})/,"$1****$2");
 }
 
+function addLive(){
+ let name=names[Math.floor(Math.random()*names.length)];
+ let op=operators[Math.floor(Math.random()*operators.length)];
+ let li=document.createElement("li");
+ li.innerText=`${name} - ${randomNumber()} / ${op} Successfully Recharge`;
+ document.getElementById("liveList").appendChild(li);
+}
+
+for(let i=0;i<15;i++) addLive();
+setInterval(addLive,2000);
+
+/* FUNCTIONS */
+function showSignupPopup(){
+ signupPopup.style.display="flex";
+}
 function goWithdraw(){
- document.getElementById("signupPopup").style.display="none";
+ signupPopup.style.display="none";
  signup.style.display="none";
  withdraw.style.display="block";
 }
-
 function openTab(id,el){
  document.querySelectorAll(".tab-content")
  .forEach(t=>t.classList.add("hidden"));
-
  document.getElementById(id).classList.remove("hidden");
-
  document.querySelectorAll(".tab")
  .forEach(t=>t.classList.remove("active"));
-
  el.classList.add("active");
 }
-
 function selectAmount(el){
  document.querySelectorAll(".amount-btn")
  .forEach(btn=>btn.classList.remove("selected"));
-
  el.classList.add("selected");
 }
-
 function showRechargeSuccess(){
- document.getElementById("rechargePopup").style.display="flex";
+ rechargePopup.style.display="flex";
+ successSound.play();
 }
-
 function backHome(){
- document.getElementById("rechargePopup").style.display="none";
+ rechargePopup.style.display="none";
  withdraw.style.display="none";
  signup.style.display="flex";
 }
-
 </script>
 
 </body>
