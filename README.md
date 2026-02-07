@@ -181,11 +181,11 @@ input,select{
 <div id="withdraw" class="screen">
     <div class="header">
         <div>Withdraw</div>
-        <div class="balance">₹517.32</div>
+        <div class="balance">₹180.00</div>
         <div>Earning cash</div>
     </div>
 
-    <div class="notification">🔔 रोज ₹20 से ₹1000 निकाल सकते हैं</div>
+    <div class="notification">🔔 रोज ₹10 से ₹1000 निकाल सकते हैं</div>
 
     <div class="live"><div id="liveList"></div></div>
 
@@ -220,7 +220,7 @@ input,select{
 <div id="popup">
     <div class="popup-box">
         <b>Congratulations ₹180 Free ADD</b><br>
-        <span>Your Wallet Withdrawal Cash Free</span><br>
+        <span>Your Wallet Withdrawal Cash Free Click Here</span><br>
         <button class="ok-btn" onclick="goWithdraw()">OK</button>
     </div>
 </div>
