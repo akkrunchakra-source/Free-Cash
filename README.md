@@ -12,7 +12,6 @@ body{
     overflow:hidden;
 }
 
-/* HEIGHT */
 .screen{ height:var(--vh); }
 
 /* SIGNUP */
@@ -43,7 +42,7 @@ body{
     font-size:16px;
 }
 
-/* WITHDRAW */
+/* WALLET */
 #withdraw{
     display:none;
     background:#fff;
@@ -74,7 +73,7 @@ input,select{
     margin:6px 0;
 }
 
-/* AMOUNT GRID */
+/* AMOUNT */
 .amount-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -85,8 +84,6 @@ input,select{
     border:1px solid #ddd;
     text-align:center;
 }
-
-/* SELECTED */
 .amount-btn.selected{
     border:2px solid #ffd700;
     background:#fff8cc;
@@ -110,7 +107,7 @@ input,select{
     margin-top:10px;
 }
 
-/* POPUPS */
+/* POPUP */
 .popup-bg{
     display:none;
     position:fixed;
@@ -127,6 +124,12 @@ input,select{
     border-radius:12px;
     text-align:center;
     max-width:300px;
+    animation:blink 1s infinite;
+}
+@keyframes blink{
+0%{opacity:1;}
+50%{opacity:0.5;}
+100%{opacity:1;}
 }
 .popup-box button{
     margin-top:15px;
@@ -148,7 +151,7 @@ input,select{
     <input type="password" placeholder="Password">
     <input placeholder="Referral Code">
     <input placeholder="Verify Code">
-    <button class="signup-btn" onclick="goWithdraw()">Signup</button>
+    <button class="signup-btn" onclick="showSignupPopup()">Signup</button>
 </div>
 
 <!-- WALLET -->
@@ -163,7 +166,6 @@ input,select{
         <div class="tab" onclick="openTab('recharge',this)">Recharge</div>
     </div>
 
-    <!-- PAYTM -->
     <div id="paytm" class="tab-content">
         <input value="335258xxx05">
 
@@ -179,7 +181,6 @@ input,select{
         <div class="withdraw-btn">Withdraw Demo</div>
     </div>
 
-    <!-- RECHARGE -->
     <div id="recharge" class="tab-content hidden">
         <input placeholder="Mobile Number">
         <select>
@@ -191,7 +192,16 @@ input,select{
 
 </div>
 
-<!-- SUCCESS POPUP -->
+<!-- SIGNUP BONUS POPUP -->
+<div id="signupPopup" class="popup-bg">
+    <div class="popup-box">
+        <b>Signup Bonus Unlocked</b><br><br>
+        You can now use wallet features.<br>
+        <button onclick="goWithdraw()">OK</button>
+    </div>
+</div>
+
+<!-- RECHARGE SUCCESS -->
 <div id="rechargePopup" class="popup-bg">
     <div class="popup-box">
         <b>Recharge Successfully Completed</b><br><br>
@@ -202,14 +212,18 @@ input,select{
 
 <script>
 
-/* HEIGHT FIX */
 function setVH(){
  document.documentElement.style.setProperty('--vh', window.innerHeight + 'px');
 }
 setVH(); window.addEventListener('resize', setVH);
 
-/* NAVIGATION */
+/* SIGNUP POPUP */
+function showSignupPopup(){
+ document.getElementById("signupPopup").style.display="flex";
+}
+
 function goWithdraw(){
+ document.getElementById("signupPopup").style.display="none";
  signup.style.display="none";
  withdraw.style.display="block";
 }
@@ -227,7 +241,7 @@ function openTab(id,el){
  el.classList.add("active");
 }
 
-/* AMOUNT SELECT */
+/* AMOUNT */
 function selectAmount(el){
  document.querySelectorAll(".amount-btn")
  .forEach(btn=>btn.classList.remove("selected"));
@@ -235,7 +249,7 @@ function selectAmount(el){
  el.classList.add("selected");
 }
 
-/* POPUP */
+/* RECHARGE */
 function showRechargeSuccess(){
  document.getElementById("rechargePopup").style.display="flex";
 }
