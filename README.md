@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wallet Platform</title>
+<title>Demo Wallet Platform</title>
 
 <style>
 *{box-sizing:border-box;}
@@ -107,6 +107,55 @@ input,select{
     margin-top:10px;
 }
 
+/* ===== LIVE RECHARGE DEMO ===== */
+.live-box{
+    margin-top:15px;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.live-header{
+    background:linear-gradient(90deg,#ff0080,#ff8c00,#40e0d0);
+    color:#fff;
+    padding:10px;
+    font-weight:bold;
+    text-align:center;
+}
+
+.live-time{
+    font-size:12px;
+    margin-top:3px;
+}
+
+.live-list{
+    height:120px;
+    background:#000;
+    color:#00ff9d;
+    overflow:hidden;
+    position:relative;
+}
+
+.live-list ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+    position:absolute;
+    width:100%;
+    animation:scrollLive 12s linear infinite;
+}
+
+.live-list li{
+    padding:6px 10px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    font-size:14px;
+}
+
+@keyframes scrollLive{
+    0%{top:100%;}
+    100%{top:-100%;}
+}
+
 /* POPUP */
 .popup-bg{
     display:none;
@@ -146,12 +195,12 @@ input,select{
 
 <!-- SIGNUP -->
 <div id="signup" class="screen">
-    <h2>पैसे कमाने के लिए और अधिक Free Mobile DATA Earn के लिए अपना Account Sign-Up करें!</h2>
+    <h2>Demo Wallet Sign-Up</h2>
     <input placeholder="+91 Phone">
     <input type="password" placeholder="Password">
     <input placeholder="Referral Code">
     <input placeholder="Verify Code">
-    <button class="signup-btn" onclick="showSignupPopup()">Sign-up Here</button>
+    <button class="signup-btn" onclick="showSignupPopup()">Signup</button>
 </div>
 
 <!-- WALLET -->
@@ -190,12 +239,37 @@ input,select{
         <div class="withdraw-btn" onclick="showRechargeSuccess()">Recharge Now</div>
     </div>
 
+    <!-- LIVE RECHARGE DEMO -->
+    <div class="live-box">
+        <div class="live-header">
+            Free Mobile Recharge Successfully
+            <div class="live-time">Time 7:30 PM Today</div>
+        </div>
+
+        <div class="live-list">
+            <ul>
+                <li>Anuj Kumar - 6397****59 / Jio Successfully Recharge</li>
+                <li>Rahul Kumar - 8XXX****21 / Jio Successfully Recharge</li>
+                <li>Annu Sharma - 9XXX****34 / Airtel Successfully Recharge</li>
+                <li>Parul Kha - 7XXX****65 / Jio Successfully Recharge</li>
+                <li>Anil Kumar - 8XXX****77 / Airtel Successfully Recharge</li>
+                <li>Rajat Dhan - 9XXX****88 / Jio Successfully Recharge</li>
+                <li>Gorav Kashyap - 6XXX****55 / Airtel Successfully Recharge</li>
+                <li>Arun Singh - 7XXX****90 / Jio Successfully Recharge</li>
+                <li>Pooja Sharma - 8XXX****44 / Airtel Successfully Recharge</li>
+                <li>Pooja Singh - 9XXX****11 / Jio Successfully Recharge</li>
+                <li>Pihu Pal - 6XXX****66 / Airtel Successfully Recharge</li>
+                <li>Ritika Tanu - 7XXX****22 / Jio Successfully Recharge</li>
+            </ul>
+        </div>
+    </div>
+
 </div>
 
 <!-- SIGNUP BONUS POPUP -->
 <div id="signupPopup" class="popup-bg">
     <div class="popup-box">
-        <b>Signup Bonus ₹180 Unlocked</b><br><br>
+        <b>Signup Bonus Unlocked</b><br><br>
         You can now use wallet features.<br>
         <button onclick="goWithdraw()">OK</button>
     </div>
@@ -217,7 +291,6 @@ function setVH(){
 }
 setVH(); window.addEventListener('resize', setVH);
 
-/* SIGNUP POPUP */
 function showSignupPopup(){
  document.getElementById("signupPopup").style.display="flex";
 }
@@ -228,7 +301,6 @@ function goWithdraw(){
  withdraw.style.display="block";
 }
 
-/* TAB */
 function openTab(id,el){
  document.querySelectorAll(".tab-content")
  .forEach(t=>t.classList.add("hidden"));
@@ -241,7 +313,6 @@ function openTab(id,el){
  el.classList.add("active");
 }
 
-/* AMOUNT */
 function selectAmount(el){
  document.querySelectorAll(".amount-btn")
  .forEach(btn=>btn.classList.remove("selected"));
@@ -249,7 +320,6 @@ function selectAmount(el){
  el.classList.add("selected");
 }
 
-/* RECHARGE */
 function showRechargeSuccess(){
  document.getElementById("rechargePopup").style.display="flex";
 }
