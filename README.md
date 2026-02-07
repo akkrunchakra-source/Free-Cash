@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Cash</title>
+<title>6Gain Earning Platform</title>
 
 <style>
 *{box-sizing:border-box;}
@@ -18,7 +17,7 @@ body{
     height:var(--vh);
 }
 
-/* ===== SIGNUP ===== */
+/* ===== SIGN-UP ===== */
 #signup{
     background:#000;
     color:#fff;
