@@ -194,7 +194,7 @@ input,select{
 <body>
 
 <div id="signup" class="screen">
-    <h2>Sign-Up Click Here</h2>
+    <h2>पैसे कमाने के साथ Free Mobile reacharge Data Earn करने के लिए अपना Account Sign-up‌ करें पहला Bonus Free For New User</h2>
     <input placeholder="+91 Phone">
     <input type="password" placeholder="Password">
     <input placeholder="Referral Code">
@@ -217,12 +217,12 @@ input,select{
         <input value="335258xxx05">
 
         <div class="amount-grid">
-            <div class="amount-btn" onclick="selectAmount(this)">₹10</div>
-            <div class="amount-btn" onclick="selectAmount(this)">₹20</div>
-            <div class="amount-btn" onclick="selectAmount(this)">₹50</div>
-            <div class="amount-btn" onclick="selectAmount(this)">₹100</div>
-            <div class="amount-btn" onclick="selectAmount(this)">₹500</div>
-            <div class="amount-btn" onclick="selectAmount(this)">₹2000</div>
+            <div class="amount-btn" onclick="selectAmount(this)">₹19</div>
+            <div class="amount-btn" onclick="selectAmount(this)">₹29</div>
+            <div class="amount-btn" onclick="selectAmount(this)">₹69</div>
+            <div class="amount-btn" onclick="selectAmount(this)">₹199</div>
+            <div class="amount-btn" onclick="selectAmount(this)">₹299</div>
+            <div class="amount-btn" onclick="selectAmount(this)">₹399</div>
         </div>
 
         <div class="withdraw-btn">Withdraw Demo</div>
@@ -255,14 +255,14 @@ input,select{
 <!-- POPUPS -->
 <div id="signupPopup" class="popup-bg">
     <div class="popup-box">
-        Signup - Free Bonus ₹180 Unlocked Here Check Withdrawal Wallet<br>
+        Congratulations 🎉 Your Free Bonus ₹180 Unlocked Here Check Withdrawal Wallet<br>
         <button onclick="goWithdraw()">OK</button>
     </div>
 </div>
 
 <div id="rechargePopup" class="popup-bg">
     <div class="popup-box">
-        Recharge Successfully Completed<br>
+        Your ₹19 Recharge Successfully Completed Check Text SMS Inbox<br>
         <button onclick="backHome()">Back</button>
     </div>
 </div>
