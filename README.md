@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo Wallet Platform</title>
+<title>Wallet Platform</title>
 
 <style>
 *{box-sizing:border-box;}
@@ -195,12 +194,12 @@ input,select{
 <body>
 
 <div id="signup" class="screen">
-    <h2>Demo Wallet Sign-Up</h2>
+    <h2>Sign-Up Click Here</h2>
     <input placeholder="+91 Phone">
     <input type="password" placeholder="Password">
     <input placeholder="Referral Code">
     <input placeholder="Verify Code">
-    <button class="signup-btn" onclick="showSignupPopup()">Signup</button>
+    <button class="signup-btn" onclick="showSignupPopup()">Signup- Click Here</button>
 </div>
 
 <div id="withdraw" class="screen">
@@ -256,7 +255,7 @@ input,select{
 <!-- POPUPS -->
 <div id="signupPopup" class="popup-bg">
     <div class="popup-box">
-        Signup Bonus Unlocked<br>
+        Signup - Free Bonus ₹180 Unlocked Here Check Withdrawal Wallet<br>
         <button onclick="goWithdraw()">OK</button>
     </div>
 </div>
