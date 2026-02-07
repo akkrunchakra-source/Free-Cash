@@ -199,7 +199,7 @@ input,select{
     <input type="password" placeholder="Password">
     <input placeholder="Referral Code">
     <input placeholder="Verify Code">
-    <button class="signup-btn" onclick="showSignupPopup()">Signup- Click Here</button>
+    <button class="signup-btn" onclick="showSignupPopup()">Signup - Click Here</button>
 </div>
 
 <div id="withdraw" class="screen">
@@ -225,7 +225,7 @@ input,select{
             <div class="amount-btn" onclick="selectAmount(this)">₹399</div>
         </div>
 
-        <div class="withdraw-btn">Withdraw Demo</div>
+        <div class="withdraw-btn">Withdraw Now</div>
     </div>
 
     <div id="recharge" class="tab-content hidden">
@@ -255,14 +255,21 @@ input,select{
 <!-- POPUPS -->
 <div id="signupPopup" class="popup-bg">
     <div class="popup-box">
-        Congratulations 🎉 Your Free Bonus ₹180 Unlocked Here Check Withdrawal Wallet<br>
+        Congratulations! 🎉 🎉 Your Free ₹180 Bonus Unlocked Here. Check Withdrawal Wallet<br>
         <button onclick="goWithdraw()">OK</button>
     </div>
 </div>
 
 <div id="rechargePopup" class="popup-bg">
     <div class="popup-box">
-        Your ₹19 Recharge Successfully Completed Check Text SMS Inbox<br>
+      Jio: Recharge successful.
+
+Voucher: ₹19 Data Add-on
+Benefits: 1GB High Speed Data
+Validity: 1 Day or till active base plan validity (whichever applicable)
+
+Check balance on MyJio App.
+Thank you for choosing Jio.<br>
         <button onclick="backHome()">Back</button>
     </div>
 </div>
