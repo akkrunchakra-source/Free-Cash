@@ -2,78 +2,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wallet Platform</title>
+<title>Wallet App</title>
 
 <style>
-*{box-sizing:border-box;}
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-    margin:0;
     font-family:Arial, sans-serif;
+    background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+    color:#fff;
     overflow:hidden;
 }
+.screen{height:100vh;display:none}
+.show{display:block}
 
-.screen{ height:var(--vh); }
-
-/* SIGNUP */
+/* ---------- SIGNUP ---------- */
 #signup{
-    background:#000;
-    color:#fff;
-    padding:20px;
     display:flex;
     flex-direction:column;
     justify-content:center;
+    padding:20px;
 }
+#signup h2{margin-bottom:15px;font-size:18px}
 #signup input{
-    width:100%;
+    margin:6px 0;
     padding:14px;
-    margin:8px 0;
-    background:#222;
     border:none;
-    border-radius:8px;
+    border-radius:10px;
+    background:#ffffff22;
     color:#fff;
 }
 .signup-btn{
     margin-top:15px;
-    padding:16px;
-    background:red;
+    padding:14px;
     border:none;
     border-radius:30px;
-    color:white;
-    font-size:16px;
+    background:linear-gradient(90deg,#ff416c,#ff4b2b);
+    color:#fff;
     font-weight:bold;
+    font-size:16px;
 }
 
-/* WALLET */
-#withdraw{
-    display:none;
-    background:#fff;
-}
+/* ---------- HEADER GLASS ---------- */
 .header{
-    background:#ffd700;
-    padding:12px;
+    margin:15px;
+    padding:16px;
+    border-radius:16px;
+    backdrop-filter:blur(10px);
+    background:rgba(255,255,255,0.15);
     text-align:center;
 }
-.balance{font-size:24px;font-weight:bold;}
+.balance{
+    font-size:28px;
+    font-weight:bold;
+    margin-top:6px;
+}
 
+/* ---------- TABS ---------- */
 .tabs{
     display:flex;
     justify-content:space-around;
-    border-bottom:1px solid #ddd;
+    margin:10px;
 }
 .tab{
-    padding:10px;
-    font-weight:bold;
+    padding:8px 14px;
+    border-radius:20px;
+    background:#ffffff22;
 }
-.tab.active{border-bottom:2px solid #ffd700;}
-.tab-content{padding:10px;}
-.hidden{display:none;}
+.tab.active{background:#ffd700;color:#000;font-weight:bold}
+.tab-content{padding:10px}
 
-input,select{
-    width:100%;
-    padding:10px;
-    margin:6px 0;
-}
-
+/* ---------- AMOUNT GRID ---------- */
 .amount-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -81,308 +79,236 @@ input,select{
 }
 .amount-btn{
     padding:10px;
-    border:1px solid #ddd;
+    background:#ffffff22;
     text-align:center;
+    border-radius:10px;
 }
 .amount-btn.selected{
-    border:2px solid #ffd700;
-    background:#fff8cc;
+    background:#ffd700;
+    color:#000;
     font-weight:bold;
-    position:relative;
-}
-.amount-btn.selected::after{
-    content:"✔";
-    position:absolute;
-    top:4px;
-    right:6px;
-    color:green;
 }
 
-.withdraw-btn{
-    background:#ffd700;
-    padding:14px;
-    text-align:center;
-    font-weight:bold;
+/* ---------- BUTTON ---------- */
+.main-btn{
     margin-top:10px;
-}
-
-/* LIVE DEMO */
-.live-box{
-    margin-top:15px;
-    border-radius:12px;
-    overflow:hidden;
-}
-
-.live-header{
-    background:linear-gradient(90deg,#ff0080,#ff8c00,#40e0d0);
-    color:#fff;
-    padding:10px;
-    font-weight:bold;
-    text-align:center;
-}
-
-.live-time{
-    font-size:12px;
-}
-
-.live-indicator{
-    color:#00ff00;
-    font-weight:bold;
-    animation:liveBlink 1s infinite;
-}
-@keyframes liveBlink{
-    0%{opacity:1;text-shadow:0 0 5px #0f0;}
-    50%{opacity:0.3;text-shadow:0 0 15px #0f0;}
-    100%{opacity:1;text-shadow:0 0 5px #0f0;}
-}
-
-.live-list{
-    height:120px;
-    background:#000;
-    color:#00ff9d;
-    overflow:hidden;
-    position:relative;
-}
-
-.live-list ul{
-    list-style:none;
-    padding:0;
-    margin:0;
-    position:absolute;
-    width:100%;
-    animation:scrollLive 6s linear infinite;
-}
-
-.live-list li{
-    padding:6px 10px;
-    border-bottom:1px solid rgba(255,255,255,0.1);
-}
-
-@keyframes scrollLive{
-    0%{top:100%;}
-    100%{top:-100%;}
-}
-
-/* POPUP */
-.popup-bg{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.7);
-    align-items:center;
-    justify-content:center;
-    z-index:10;
-}
-.popup-box{
-    background:#000;
-    color:#fff;
-    padding:25px;
-    border-radius:12px;
-    text-align:center;
-    max-width:300px;
-}
-.popup-box button{
-    margin-top:15px;
-    padding:10px 20px;
+    padding:14px;
     background:#ffd700;
-    border:none;
-    border-radius:20px;
+    color:#000;
+    border-radius:30px;
+    text-align:center;
     font-weight:bold;
 }
-    /* ===== EARN OPTIONS ===== */
+
+/* ---------- EARN OPTIONS ---------- */
 .earn-options{
     margin:12px;
     display:flex;
     flex-direction:column;
     gap:10px;
 }
-
 .earn-box{
     padding:14px;
+    border-radius:12px;
     text-align:center;
     font-weight:bold;
-    border-radius:8px;
-    color:#fff;
-    font-size:15px;
     animation:blink 1.5s infinite;
 }
-
-.earn-box.red{
-    background:linear-gradient(90deg,#ff416c,#ff4b2b);
-}
-
-.earn-box.green{
-    background:linear-gradient(90deg,#11998e,#38ef7d);
-}
-
+.red{background:linear-gradient(90deg,#ff416c,#ff4b2b)}
+.green{background:linear-gradient(90deg,#11998e,#38ef7d)}
 @keyframes blink{
-    0%{opacity:1}
-    50%{opacity:0.7}
-    100%{opacity:1}
+    50%{opacity:.7}
+}
+
+/* ---------- LIVE BOX ---------- */
+.live-box{
+    margin:12px;
+    border-radius:14px;
+    overflow:hidden;
+}
+.live-header{
+    padding:10px;
+    background:linear-gradient(90deg,#ff0080,#ff8c00,#40e0d0);
+    text-align:center;
+}
+.live-indicator{
+    color:#00ff00;
+    animation:blink 1s infinite;
+}
+.live-list{
+    height:120px;
+    background:#000;
+    overflow:hidden;
+}
+.live-list ul{
+    list-style:none;
+    animation:scroll 8s linear infinite;
+}
+.live-list li{
+    padding:6px;
+    font-size:13px;
+    color:#00ff9d;
+}
+@keyframes scroll{
+    0%{transform:translateY(100%)}
+    100%{transform:translateY(-100%)}
+}
+
+/* ---------- BOTTOM NAV ---------- */
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:#000;
+    display:flex;
+    justify-content:space-around;
+    padding:10px 0;
+}
+.bottom-nav div{
+    font-size:12px;
+    color:#aaa;
+}
+.bottom-nav .active{color:#ffd700}
+
+/* ---------- POPUP ---------- */
+.popup-bg{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+.popup-box{
+    background:#111;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+    max-width:280px;
+}
+.popup-box button{
+    margin-top:10px;
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:#ffd700;
+    font-weight:bold;
+}
+
+/* ---------- TOAST ---------- */
+.toast{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#000;
+    padding:10px 16px;
+    border-radius:20px;
+    display:none;
+    font-size:13px;
 }
 </style>
 </head>
 
 <body>
 
-<div id="signup" class="screen">
-    <h2>पैसे कमाने के साथ Free Mobile reacharge Data Earn करने के लिए अपना Account Sign-up‌ करें पहला Bonus Free For New User</h2>
-    <input placeholder="+91 Phone">
-    <input type="text" placeholder="Password">
-    <input placeholder="Referral Code">
-    <input placeholder="Verify Code">
-    <button class="signup-btn" onclick="showSignupPopup()">Signup - Click Here</button>
+<!-- SIGNUP -->
+<div id="signup" class="screen show">
+<h2>Signup kare aur ₹180 Bonus paaye</h2>
+<input placeholder="+91 Phone">
+<input placeholder="Password">
+<input placeholder="Referral Code">
+<button class="signup-btn" onclick="signup()">Signup</button>
 </div>
 
+<!-- WALLET -->
 <div id="withdraw" class="screen">
-    <div class="header">
-        <div>Wallet Balance</div>
-        <div class="balance">₹180.00</div>
-    </div>
-
-    <div class="tabs">
-        <div class="tab active" onclick="openTab('paytm',this)">Paytm</div>
-        <div class="tab" onclick="openTab('recharge',this)">Recharge</div>
-    </div>
-
-    <div id="paytm" class="tab-content">
-        <input value="335258xxx05">
-
-        <div class="amount-grid">
-            <div class="amount-btn" onclick="selectAmount(this)">₹19</div>
-            <div class="amount-btn" onclick="selectAmount(this)">₹29</div>
-            <div class="amount-btn" onclick="selectAmount(this)">₹69</div>
-            <div class="amount-btn" onclick="selectAmount(this)">₹199</div>
-            <div class="amount-btn" onclick="selectAmount(this)">₹299</div>
-            <div class="amount-btn" onclick="selectAmount(this)">₹399</div>
-        </div>
-
-        <div class="withdraw-btn">Withdraw Now</div>
-    </div>
-
-    <div id="recharge" class="tab-content hidden">
-        <input placeholder="Mobile Number">
-        <select>
-            <option>Jio</option>
-            <option>Airtel</option>
-        </select>
-        <div class="withdraw-btn" onclick="showRechargeSuccess()">Recharge Now</div>
-    </div>
-
-    <!-- LIVE DEMO -->
-    <div class="live-box">
-        <div class="live-header">
-            Free Mobile Recharge Successfully  
-            <div class="live-indicator">● LIVE</div>
-            <div class="live-time" id="liveClock"></div>
-        </div>
-
-        <div class="live-list">
-            <ul id="liveList"></ul>
-        </div>
-    </div>
-
+<div class="header">
+<div>Wallet Balance</div>
+<div class="balance" id="balance">₹0</div>
 </div>
-<!-- EARN OPTIONS -->
+
+<div class="tabs">
+<div class="tab active" onclick="openTab('paytm',this)">Paytm</div>
+<div class="tab" onclick="openTab('recharge',this)">Recharge</div>
+</div>
+
+<div id="paytm" class="tab-content">
+<div class="amount-grid">
+<div class="amount-btn" onclick="selectAmount(this)">₹19</div>
+<div class="amount-btn" onclick="selectAmount(this)">₹29</div>
+<div class="amount-btn" onclick="selectAmount(this)">₹69</div>
+</div>
+<div class="main-btn" onclick="toast('Withdrawal Requested')">Withdraw</div>
+</div>
+
+<div id="recharge" class="tab-content" style="display:none">
+<input placeholder="Mobile Number">
+<div class="main-btn" onclick="toast('Recharge Processing…')">Recharge</div>
+</div>
+
+<!-- EARN -->
 <div class="earn-options">
-   <div class="earn-box red">Earn Money</div>
-   <div class="earn-box green">Free Mobile Recharge</div>
-   <div class="earn-box red">Watch and Earn Money</div>
-   <div class="earn-box green">Share Earn Money</div>
-</div>
-<!-- POPUPS -->
-<div id="signupPopup" class="popup-bg">
-    <div class="popup-box">
-        Congratulations! 🎉 🎉 Your Free ₹180 Bonus Unlocked Here. Check Withdrawal Wallet<br>
-        <button onclick="goWithdraw()">OK</button>
-    </div>
+<div class="earn-box red">Earn Money</div>
+<div class="earn-box green">Free Mobile Recharge</div>
+<div class="earn-box red">Watch & Earn</div>
+<div class="earn-box green">Share & Earn</div>
 </div>
 
-<div id="rechargePopup" class="popup-bg">
-    <div class="popup-box">
-      Jio: Recharge successful.
-
-Voucher: ₹19 Data Add-on
-Benefits: 1GB High Speed Data
-Validity: 1 Day or till active base plan validity (whichever applicable)
-
-Check balance on MyJio App.
-Thank you for choosing Jio.<br>
-        <button onclick="backHome()">Back</button>
-    </div>
+<!-- LIVE -->
+<div class="live-box">
+<div class="live-header">Live Recharge <span class="live-indicator">●</span></div>
+<div class="live-list">
+<ul id="liveList"></ul>
+</div>
 </div>
 
-<audio id="successSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+<div class="bottom-nav">
+<div class="active">Home</div>
+<div>Earn</div>
+<div>Wallet</div>
+<div>Profile</div>
+</div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-function setVH(){
- document.documentElement.style.setProperty('--vh', window.innerHeight + 'px');
-}
-setVH(); window.addEventListener('resize', setVH);
-
-/* CLOCK */
-setInterval(()=>{
- let now=new Date();
- document.getElementById("liveClock").innerText=
- now.toLocaleTimeString();
-},1000);
-
-/* RANDOM LIVE LIST */
-const names=[
-"Rahul Kumar","Annu Sharma","Parul Kha","Anil Kumar",
-"Rajat Dhan","Gorav Kashyap","Arun Singh",
-"Pooja Sharma","Pooja Singh","Pihu Pal","Ritika Tanu"
-];
-
-const operators=["Jio","Airtel"];
-
-function randomNumber(){
- return Math.floor(6000000000 + Math.random()*3000000000)
- .toString().replace(/(\d{4})\d{4}(\d{2})/,"$1****$2");
-}
-
-function addLive(){
- let name=names[Math.floor(Math.random()*names.length)];
- let op=operators[Math.floor(Math.random()*operators.length)];
- let li=document.createElement("li");
- li.innerText=`${name} - ${randomNumber()} / ${op} Successfully Recharge`;
- document.getElementById("liveList").appendChild(li);
-}
-
-for(let i=0;i<15;i++) addLive();
-setInterval(addLive,2000);
-
-/* FUNCTIONS */
-function showSignupPopup(){
- signupPopup.style.display="flex";
-}
-function goWithdraw(){
- signupPopup.style.display="none";
- signup.style.display="none";
- withdraw.style.display="block";
+let bal=0;
+function signup(){
+document.getElementById("signup").style.display="none";
+document.getElementById("withdraw").style.display="block";
+let i=setInterval(()=>{
+ if(bal<180){bal++;balance.innerText="₹"+bal}
+ else clearInterval(i);
+},20);
 }
 function openTab(id,el){
- document.querySelectorAll(".tab-content")
- .forEach(t=>t.classList.add("hidden"));
- document.getElementById(id).classList.remove("hidden");
- document.querySelectorAll(".tab")
- .forEach(t=>t.classList.remove("active"));
- el.classList.add("active");
+document.querySelectorAll(".tab-content").forEach(t=>t.style.display="none");
+document.getElementById(id).style.display="block";
+document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+el.classList.add("active");
 }
 function selectAmount(el){
- document.querySelectorAll(".amount-btn")
- .forEach(btn=>btn.classList.remove("selected"));
- el.classList.add("selected");
+document.querySelectorAll(".amount-btn").forEach(b=>b.classList.remove("selected"));
+el.classList.add("selected");
 }
-function showRechargeSuccess(){
- rechargePopup.style.display="flex";
- successSound.play();
+function toast(msg){
+let t=document.getElementById("toast");
+t.innerText=msg;
+t.style.display="block";
+setTimeout(()=>t.style.display="none",2000);
 }
-function backHome(){
- rechargePopup.style.display="none";
- withdraw.style.display="none";
- signup.style.display="flex";
+
+/* LIVE DATA */
+const names=["Rahul","Ankit","Pooja","Neha","Rohit"];
+function addLive(){
+let li=document.createElement("li");
+li.innerText=names[Math.floor(Math.random()*5)]+" Recharge Successful";
+liveList.appendChild(li);
 }
+for(let i=0;i<8;i++)addLive();
 </script>
 
 </body>
