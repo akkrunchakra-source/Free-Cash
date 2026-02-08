@@ -35,11 +35,12 @@ body{
 .signup-btn{
     margin-top:15px;
     padding:16px;
-    background:#2b2b2b;
+    background:red;
     border:none;
     border-radius:30px;
-    color:#fff;
+    color:white;
     font-size:16px;
+    font-weight:bold;
 }
 
 /* WALLET */
