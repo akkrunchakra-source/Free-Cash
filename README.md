@@ -24,7 +24,6 @@ animation:fade .4s ease;
 .show{display:block}
 @keyframes fade{from{opacity:0;transform:scale(.96)}to{opacity:1}}
 
-/* HEADER */
 .header{
 margin:15px;
 padding:16px;
@@ -36,7 +35,6 @@ position:relative;
 }
 .balance{font-size:28px;font-weight:bold}
 
-/* NOTIFICATION */
 .bell{
 position:absolute;
 right:15px;
@@ -44,6 +42,7 @@ top:15px;
 font-size:20px;
 cursor:pointer;
 }
+
 .notify-box{
 position:fixed;
 top:60px;
@@ -60,7 +59,6 @@ font-size:13px;
 border-bottom:1px solid #333;
 }
 
-/* BUTTON */
 .main-btn{
 margin-top:10px;
 padding:14px;
@@ -71,7 +69,6 @@ text-align:center;
 font-weight:bold;
 }
 
-/* EARN */
 .earn-options{margin:12px;display:flex;flex-direction:column;gap:10px}
 .earn-box{
 padding:14px;
@@ -84,7 +81,6 @@ animation:blink 1.5s infinite;
 .green{background:linear-gradient(90deg,#11998e,#38ef7d)}
 @keyframes blink{50%{opacity:.7}}
 
-/* LIVE */
 .live-box{margin:12px;border-radius:14px;overflow:hidden}
 .live-header{padding:10px;background:linear-gradient(90deg,#ff0080,#ff8c00,#40e0d0);text-align:center}
 .live-list{height:120px;background:#000;overflow:hidden}
@@ -92,7 +88,6 @@ animation:blink 1.5s infinite;
 .live-list li{padding:6px;font-size:13px;color:#00ff9d}
 @keyframes scroll{0%{transform:translateY(100%)}100%{transform:translateY(-100%)}}
 
-/* NAV */
 .bottom-nav{
 position:fixed;
 bottom:0;
@@ -106,7 +101,6 @@ padding:10px 0;
 .bottom-nav div{font-size:12px;color:#aaa}
 .bottom-nav .active{color:#ffd700}
 
-/* LOADER */
 .loader{
 position:fixed;
 inset:0;
@@ -118,7 +112,6 @@ font-size:20px;
 z-index:100;
 }
 
-/* TOGGLE */
 .toggle{
 position:fixed;
 top:10px;
@@ -131,7 +124,6 @@ font-size:12px;
 z-index:99;
 }
 
-/* AVATAR */
 .avatar{
 width:90px;
 height:90px;
@@ -142,6 +134,35 @@ overflow:hidden;
 }
 .avatar img{width:100%;height:100%;object-fit:cover}
 
+/* RECHARGE PLANS */
+.plans{
+margin-top:12px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+.plan{
+padding:12px;
+border-radius:12px;
+background:#ffffff15;
+border:2px solid transparent;
+font-size:13px;
+position:relative;
+cursor:pointer;
+}
+.plan.active{
+border:2px solid #00ff9d;
+background:#00ff9d22;
+}
+.tick{
+position:absolute;
+top:6px;
+right:8px;
+display:none;
+color:#00ff9d;
+}
+.plan.active .tick{display:block}
+
 </style>
 </head>
 
@@ -150,7 +171,6 @@ overflow:hidden;
 <div class="toggle" onclick="toggleMode()">Mode</div>
 <div id="loader" class="loader">Processing...</div>
 
-<!-- NOTIFICATION -->
 <div class="notify-box" id="notifyBox">
 <div>₹19 Recharge Success</div>
 <div>New Offer Available</div>
@@ -177,19 +197,52 @@ Wallet Balance
 <div class="bell" onclick="toggleNotify()">🔔</div>
 </div>
 
-<!-- RECHARGE -->
 <div style="padding:12px">
 <input placeholder="Enter Mobile Number">
+
 <select>
 <option>Select SIM</option>
 <option>Jio</option>
 <option>Airtel</option>
 <option>Vi</option>
 </select>
+
+<!-- PLANS -->
+<div class="plans">
+
+<div class="plan" onclick="selectPlan(this)">
+<div class="tick">✔</div>
+<b>₹19</b><br>
+1GB Data<br>
+Validity: 1 Day
+</div>
+
+<div class="plan" onclick="selectPlan(this)">
+<div class="tick">✔</div>
+<b>₹19</b><br>
+Unlimited Data*<br>
+Validity: 1 Hour
+</div>
+
+<div class="plan" onclick="selectPlan(this)">
+<div class="tick">✔</div>
+<b>₹19</b><br>
+1GB + 100 SMS<br>
+Validity: 1 Day
+</div>
+
+<div class="plan" onclick="selectPlan(this)">
+<div class="tick">✔</div>
+<b>₹19</b><br>
+1.5GB Data<br>
+Validity: 1 Day
+</div>
+
+</div>
+
 <div class="main-btn" onclick="fakeLoad()">Recharge</div>
 </div>
 
-<!-- EARN -->
 <div class="earn-options">
 <div class="earn-box red">Earn Money</div>
 <div class="earn-box green">Free Recharge</div>
@@ -197,7 +250,6 @@ Wallet Balance
 <div class="earn-box green">Share & Earn</div>
 </div>
 
-<!-- LIVE -->
 <div class="live-box">
 <div class="live-header">Live Activity</div>
 <div class="live-list"><ul id="liveList"></ul></div>
@@ -222,7 +274,7 @@ Wallet Balance
 <h2>Settings</h2>
 <p>Notification: ON</p>
 <p>Theme: Auto</p>
-<p>Version: 1.0.0</p>
+<p>Version: 1.0</p>
 </div>
 </div>
 
@@ -232,11 +284,9 @@ Wallet Balance
 <h2>Transactions</h2>
 <p>₹19 Recharge - Success</p>
 <p>₹29 Recharge - Success</p>
-<p>₹69 Recharge - Success</p>
 </div>
 </div>
 
-<!-- NAV -->
 <div class="bottom-nav">
 <div class="active" onclick="nav('home',this)">Home</div>
 <div onclick="nav('history',this)">History</div>
@@ -245,6 +295,7 @@ Wallet Balance
 </div>
 
 <script>
+
 let bal=0;
 
 function signup(){
@@ -283,9 +334,14 @@ notifyBox.style.display =
 notifyBox.style.display=="block"?"none":"block";
 }
 
-/* AVATAR */
 function loadAvatar(e){
 avatarImg.src=URL.createObjectURL(e.target.files[0]);
+}
+
+/* PLAN SELECT */
+function selectPlan(el){
+document.querySelectorAll(".plan").forEach(p=>p.classList.remove("active"));
+el.classList.add("active");
 }
 
 /* LIVE */
@@ -296,6 +352,7 @@ li.innerText=names[Math.floor(Math.random()*5)]+" Recharge Success";
 liveList.appendChild(li);
 }
 for(let i=0;i<8;i++)addLive();
+
 </script>
 
 </body>
