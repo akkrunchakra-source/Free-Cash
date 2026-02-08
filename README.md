@@ -283,7 +283,13 @@ input,select{
     </div>
 
 </div>
-
+<!-- EARN OPTIONS -->
+<div class="earn-options">
+   <div class="earn-box red">Earn Money</div>
+   <div class="earn-box green">Free Mobile Recharge</div>
+   <div class="earn-box red">Watch and Earn Money</div>
+   <div class="earn-box green">Share Earn Money</div>
+</div>
 <!-- POPUPS -->
 <div id="signupPopup" class="popup-bg">
     <div class="popup-box">
