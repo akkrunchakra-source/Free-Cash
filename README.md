@@ -11,46 +11,54 @@ font-family:Arial;
 background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);
 color:#fff;
 transition:.4s;
+overflow:hidden;
 }
-.light{
-background:#f2f2f2;
-color:#000;
-}
+.light{background:#f2f2f2;color:#000}
 
-.screen{display:none;height:100vh;overflow:auto}
+.screen{
+display:none;
+height:100vh;
+overflow:auto;
+animation:fade .4s ease;
+}
 .show{display:block}
-
-/* SIGNUP */
-#signup{padding:20px;margin-top:40px}
-input,select{
-width:100%;
-padding:14px;
-margin:6px 0;
-border:none;
-border-radius:10px;
-background:#ffffff22;
-color:inherit;
-}
-.signup-btn{
-margin-top:10px;
-padding:14px;
-border:none;
-border-radius:30px;
-background:linear-gradient(90deg,#ff416c,#ff4b2b);
-color:#fff;
-font-weight:bold;
-}
+@keyframes fade{from{opacity:0;transform:scale(.96)}to{opacity:1}}
 
 /* HEADER */
 .header{
 margin:15px;
 padding:16px;
 border-radius:16px;
-backdrop-filter:blur(10px);
 background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
 text-align:center;
+position:relative;
 }
 .balance{font-size:28px;font-weight:bold}
+
+/* NOTIFICATION */
+.bell{
+position:absolute;
+right:15px;
+top:15px;
+font-size:20px;
+cursor:pointer;
+}
+.notify-box{
+position:fixed;
+top:60px;
+right:10px;
+background:#000;
+border-radius:12px;
+width:220px;
+display:none;
+z-index:99;
+}
+.notify-box div{
+padding:10px;
+font-size:13px;
+border-bottom:1px solid #333;
+}
 
 /* BUTTON */
 .main-btn{
@@ -107,36 +115,58 @@ display:none;
 align-items:center;
 justify-content:center;
 font-size:20px;
+z-index:100;
 }
 
 /* TOGGLE */
 .toggle{
 position:fixed;
 top:10px;
-right:10px;
+left:10px;
 background:#ffd700;
 color:#000;
 padding:6px 12px;
 border-radius:20px;
 font-size:12px;
+z-index:99;
 }
+
+/* AVATAR */
+.avatar{
+width:90px;
+height:90px;
+border-radius:50%;
+background:#444;
+margin:auto;
+overflow:hidden;
+}
+.avatar img{width:100%;height:100%;object-fit:cover}
+
 </style>
 </head>
 
 <body>
 
 <div class="toggle" onclick="toggleMode()">Mode</div>
-
 <div id="loader" class="loader">Processing...</div>
+
+<!-- NOTIFICATION -->
+<div class="notify-box" id="notifyBox">
+<div>₹19 Recharge Success</div>
+<div>New Offer Available</div>
+<div>Wallet Updated</div>
+</div>
 
 <!-- SIGNUP -->
 <div id="signup" class="screen show">
+<div style="padding:20px;margin-top:40px">
 <h2>Signup kare aur ₹180 Bonus paaye</h2>
 <input placeholder="+91 Phone">
 <input placeholder="Password">
 <input placeholder="Referral Code">
 <input placeholder="Enter OTP">
-<button class="signup-btn" onclick="signup()">Signup</button>
+<div class="main-btn" onclick="signup()">Signup</div>
+</div>
 </div>
 
 <!-- HOME -->
@@ -144,6 +174,7 @@ font-size:12px;
 <div class="header">
 Wallet Balance
 <div class="balance" id="balance">₹0</div>
+<div class="bell" onclick="toggleNotify()">🔔</div>
 </div>
 
 <!-- RECHARGE -->
@@ -175,10 +206,23 @@ Wallet Balance
 
 <!-- PROFILE -->
 <div id="profile" class="screen">
-<div style="padding:20px">
-<h2>Profile</h2>
-<p>Name: Demo User</p>
+<div style="padding:20px;text-align:center">
+<div class="avatar">
+<img id="avatarImg">
+</div>
+<input type="file" onchange="loadAvatar(event)">
+<h3>Demo User</h3>
 <p>Status: Active</p>
+</div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settings" class="screen">
+<div style="padding:20px">
+<h2>Settings</h2>
+<p>Notification: ON</p>
+<p>Theme: Auto</p>
+<p>Version: 1.0.0</p>
 </div>
 </div>
 
@@ -197,6 +241,7 @@ Wallet Balance
 <div class="active" onclick="nav('home',this)">Home</div>
 <div onclick="nav('history',this)">History</div>
 <div onclick="nav('profile',this)">Profile</div>
+<div onclick="nav('settings',this)">Settings</div>
 </div>
 
 <script>
@@ -210,12 +255,12 @@ let i=setInterval(()=>{
 if(bal<180){bal++;balance.innerText="₹"+bal}
 else clearInterval(i);
 },20);
-},1500);
+},1200);
 }
 
 function fakeLoad(){
 loader.style.display="flex";
-setTimeout(()=>loader.style.display="none",1500);
+setTimeout(()=>loader.style.display="none",1200);
 }
 
 function showScreen(id){
@@ -233,11 +278,21 @@ function toggleMode(){
 document.body.classList.toggle("light");
 }
 
+function toggleNotify(){
+notifyBox.style.display =
+notifyBox.style.display=="block"?"none":"block";
+}
+
+/* AVATAR */
+function loadAvatar(e){
+avatarImg.src=URL.createObjectURL(e.target.files[0]);
+}
+
 /* LIVE */
 const names=["Rahul","Ankit","Pooja","Neha","Rohit"];
 function addLive(){
 let li=document.createElement("li");
-li.innerText=names[Math.floor(Math.random()*5)]+" Activity Done";
+li.innerText=names[Math.floor(Math.random()*5)]+" Recharge Success";
 liveList.appendChild(li);
 }
 for(let i=0;i<8;i++)addLive();
