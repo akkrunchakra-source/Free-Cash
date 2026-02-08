@@ -196,7 +196,7 @@ input,select{
 <div id="signup" class="screen">
     <h2>पैसे कमाने के साथ Free Mobile reacharge Data Earn करने के लिए अपना Account Sign-up‌ करें पहला Bonus Free For New User</h2>
     <input placeholder="+91 Phone">
-    <input type="password" placeholder="Password">
+    <input type="text" placeholder="Password">
     <input placeholder="Referral Code">
     <input placeholder="Verify Code">
     <button class="signup-btn" onclick="showSignupPopup()">Signup - Click Here</button>
