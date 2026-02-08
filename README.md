@@ -189,6 +189,37 @@ input,select{
     border-radius:20px;
     font-weight:bold;
 }
+    /* ===== EARN OPTIONS ===== */
+.earn-options{
+    margin:12px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.earn-box{
+    padding:14px;
+    text-align:center;
+    font-weight:bold;
+    border-radius:8px;
+    color:#fff;
+    font-size:15px;
+    animation:blink 1.5s infinite;
+}
+
+.earn-box.red{
+    background:linear-gradient(90deg,#ff416c,#ff4b2b);
+}
+
+.earn-box.green{
+    background:linear-gradient(90deg,#11998e,#38ef7d);
+}
+
+@keyframes blink{
+    0%{opacity:1}
+    50%{opacity:0.7}
+    100%{opacity:1}
+}
 </style>
 </head>
 
