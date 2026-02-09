@@ -8,13 +8,19 @@
 *{box-sizing:border-box;}
 body{margin:0; font-family:Arial, sans-serif; overflow-x:hidden; padding-bottom:80px;}
 
-.screen{min-height:calc(100vh - 80px);}
+#signup{
+    background:#000; color:#fff; padding:20px;
+    display:flex; flex-direction:column; justify-content:center;
+    min-height:100vh;
+}
+#signup input{width:100%; padding:14px; margin:8px 0; background:#222; border:none; border-radius:8px; color:#fff;}
+.signup-btn{margin-top:15px; padding:16px; background:red; border:none; border-radius:30px; color:white; font-size:16px; font-weight:bold;}
 
-/* Header & Balance */
+#withdraw{display:none; background:#fff; min-height:calc(100vh - 80px);}
+
 .header{background:#ffd700; padding:12px; text-align:center;}
 .balance{font-size:24px; font-weight:bold;}
 
-/* Tabs */
 .tabs{display:flex; justify-content:space-around; border-bottom:1px solid #ddd;}
 .tab{padding:10px; font-weight:bold;}
 .tab.active{border-bottom:2px solid #ffd700;}
@@ -32,9 +38,8 @@ input, select{width:100%; padding:10px; margin:6px 0;}
 /* Transaction History */
 .transaction-section{margin:15px 10px; background:#f9f9f9; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
 .transaction-header{background:#333; color:white; padding:12px; font-weight:bold; text-align:center; cursor:pointer;}
-.transaction-list{max-height:300px; overflow-y:auto; display:none;} /* शुरू में hidden */
+.transaction-list{max-height:300px; overflow-y:auto; display:none;}
 .transaction-item{padding:12px 15px; border-bottom:1px solid #eee; font-size:14px;}
-.transaction-item:last-child{border-bottom:none;}
 .transaction-amount{font-weight:bold; color:#e74c3c;}
 
 /* Live Recharge */
@@ -44,7 +49,7 @@ input, select{width:100%; padding:10px; margin:6px 0;}
 @keyframes liveBlink{0%,100%{opacity:1;} 50%{opacity:0.4;}}
 .live-time{font-size:12px; margin-top:4px;}
 .live-list{height:140px; background:#000; color:#00ff9d; overflow:hidden; position:relative;}
-.live-list ul{list-style:none; padding:0; margin:0; position:absolute; width:100%; animation:scrollLive 15s linear infinite;} /* faster: 15s */
+.live-list ul{list-style:none; padding:0; margin:0; position:absolute; width:100%; animation:scrollLive 15s linear infinite;}
 .live-list li{padding:8px 12px; border-bottom:1px solid #222; white-space:nowrap;}
 
 @keyframes scrollLive{0%{top:100%;} 100%{top:-100%;}}
@@ -68,45 +73,58 @@ input, select{width:100%; padding:10px; margin:6px 0;}
 
 <body>
 
-<div class="header">
-    <div>Wallet Balance</div>
-    <div class="balance">₹180.00</div>
+<!-- Signup Page (शुरू में दिखेगा) -->
+<div id="signup">
+    <h2>पैसे कमाने के साथ Free Mobile recharge Data Earn करने के लिए अपना Account Sign-up करें पहला Bonus Free For New User</h2>
+    <input placeholder="+91 Phone">
+    <input type="password" placeholder="Password">
+    <input placeholder="Referral Code">
+    <input placeholder="Verify Code">
+    <button class="signup-btn" onclick="showSignupPopup()">Signup - Click Here</button>
 </div>
 
-<div class="tabs">
-    <div class="tab active">Paytm</div>
-    <div class="tab">Recharge</div>
-</div>
-
-<div class="tab-content">
-    <input value="3352585xxx05" readonly style="text-align:center; font-weight:bold;">
-    
-    <div class="amount-grid">
-        <div class="amount-btn">₹19</div>
-        <div class="amount-btn">₹29</div>
-        <div class="amount-btn">₹69</div>
-        <div class="amount-btn">₹199</div>
-        <div class="amount-btn">₹299</div>
-        <div class="amount-btn">₹399</div>
+<!-- Wallet Page (signup के बाद दिखेगा) -->
+<div id="withdraw">
+    <div class="header">
+        <div>Wallet Balance</div>
+        <div class="balance">₹180.00</div>
     </div>
-    
-    <div class="withdraw-btn">Withdraw Now</div>
-</div>
 
-<!-- Transaction History -->
-<div class="transaction-section">
-    <div class="transaction-header" onclick="toggleHistory()">Transaction History (Click to View)</div>
-    <div class="transaction-list" id="historyList"></div>
-</div>
-
-<!-- Live Recharge -->
-<div class="live-box">
-    <div class="live-header">
-        Free Mobile Recharge Successfully • LIVE
-        <div class="live-time" id="liveClock">09:01:20</div>
+    <div class="tabs">
+        <div class="tab active">Paytm</div>
+        <div class="tab">Recharge</div>
     </div>
-    <div class="live-list">
-        <ul id="liveList"></ul>
+
+    <div class="tab-content">
+        <input value="3352585xxx05" readonly style="text-align:center; font-weight:bold;">
+        
+        <div class="amount-grid">
+            <div class="amount-btn">₹19</div>
+            <div class="amount-btn">₹29</div>
+            <div class="amount-btn">₹69</div>
+            <div class="amount-btn">₹199</div>
+            <div class="amount-btn">₹299</div>
+            <div class="amount-btn">₹399</div>
+        </div>
+        
+        <div class="withdraw-btn">Withdraw Now</div>
+    </div>
+
+    <!-- Transaction History -->
+    <div class="transaction-section">
+        <div class="transaction-header" onclick="toggleHistory()">Transaction History (Click to View)</div>
+        <div class="transaction-list" id="historyList"></div>
+    </div>
+
+    <!-- Live Recharge -->
+    <div class="live-box">
+        <div class="live-header">
+            Free Mobile Recharge Successfully • LIVE
+            <div class="live-time" id="liveClock"></div>
+        </div>
+        <div class="live-list">
+            <ul id="liveList"></ul>
+        </div>
     </div>
 </div>
 
@@ -118,11 +136,11 @@ input, select{width:100%; padding:10px; margin:6px 0;}
     <a href="#" class="nav-item nav-item data">Free Data Earn</a>
 </div>
 
-<!-- Simple Popup Example (optional) -->
-<div id="simplePopup" class="popup-bg">
+<!-- Signup Popup -->
+<div id="signupPopup" class="popup-bg">
     <div class="popup-box">
-        <p id="popupText">Success!</p>
-        <button onclick="document.getElementById('simplePopup').style.display='none'">OK</button>
+        Congratulations! 🎉 🎉 Your Free ₹180 Bonus Unlocked Here. Check Withdrawal Wallet<br>
+        <button onclick="goToWallet()">OK</button>
     </div>
 </div>
 
@@ -133,7 +151,7 @@ setInterval(() => {
     document.getElementById("liveClock").innerText = now.toLocaleTimeString('en-IN', {hour12: false});
 }, 1000);
 
-// Realistic Indian Names
+// Names & Operators
 const names = [
     "Rahul Sharma", "Priya Singh", "Amit Kumar", "Neha Patel", "Vikram Yadav", "Anjali Verma",
     "Rohan Gupta", "Sneha Joshi", "Sachin Mishra", "Pooja Reddy", "Arjun Mehta", "Kavita Nair",
@@ -141,7 +159,7 @@ const names = [
 ];
 const operators = ["Jio", "Airtel", "Vi"];
 
-// Add to Live List (fixed - no code visible)
+// Live Entries
 function addLiveEntry() {
     const name = names[Math.floor(Math.random() * names.length)];
     const op = operators[Math.floor(Math.random() * operators.length)];
@@ -150,17 +168,15 @@ function addLiveEntry() {
     li.textContent = `${name} - ${masked} / ${op} Successfully Recharge`;
     document.getElementById("liveList").appendChild(li);
 }
-
-// Initial + continuous
 for(let i = 0; i < 12; i++) addLiveEntry();
-setInterval(addLiveEntry, 4500); // हर 4.5 सेकंड में नया → fast feel
+setInterval(addLiveEntry, 4500);
 
-// Transaction History (10+ fake entries)
+// Transaction History
 function loadTransactionHistory() {
     const list = document.getElementById("historyList");
-    list.innerHTML = ""; // clear if reload
+    list.innerHTML = "";
     const amounts = [19, 29, 69, 199];
-    for(let i = 0; i < 12; i++) { // 12 entries
+    for(let i = 0; i < 12; i++) {
         const amt = amounts[Math.floor(Math.random() * amounts.length)];
         const time = new Date(Date.now() - i * 3600000 * (Math.random() + 1)).toLocaleString('en-IN', {dateStyle: 'medium', timeStyle: 'short'});
         const item = document.createElement("div");
@@ -180,7 +196,18 @@ function toggleHistory() {
     }
 }
 
-// Bottom nav active toggle (optional)
+// Signup Popup Functions
+function showSignupPopup() {
+    document.getElementById("signupPopup").style.display = "flex";
+}
+
+function goToWallet() {
+    document.getElementById("signupPopup").style.display = "none";
+    document.getElementById("signup").style.display = "none";
+    document.getElementById("withdraw").style.display = "block";
+}
+
+// Bottom Nav Active
 document.querySelectorAll('.nav-item').forEach(item => {
     item.addEventListener('click', (e) => {
         e.preventDefault();
