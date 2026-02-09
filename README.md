@@ -6,30 +6,60 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-
 body{
 font-family:Arial;
 background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);
 color:#fff;
 overflow:hidden;
 }
+.light{background:#f2f2f2;color:#000}
 
 .screen{
 display:none;
 height:100vh;
 overflow:auto;
-animation:fade .5s ease;
+animation:fade .4s ease;
 }
 .show{display:block}
+@keyframes fade{from{opacity:0;transform:scale(.96)}to{opacity:1}}
 
-@keyframes fade{
-from{opacity:0;transform:translateY(15px)}
-to{opacity:1}
+.header{
+margin:15px;
+padding:16px;
+border-radius:16px;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(10px);
+text-align:center;
+position:relative;
+}
+.balance{font-size:28px;font-weight:bold}
+
+.bell{
+position:absolute;
+right:15px;
+top:15px;
+font-size:20px;
+cursor:pointer;
 }
 
-/* BUTTON */
+.notify-box{
+position:fixed;
+top:60px;
+right:10px;
+background:#000;
+border-radius:12px;
+width:220px;
+display:none;
+z-index:99;
+}
+.notify-box div{
+padding:10px;
+font-size:13px;
+border-bottom:1px solid #333;
+}
+
 .main-btn{
-margin-top:14px;
+margin-top:12px;
 padding:14px;
 background:#ffd700;
 color:#000;
@@ -37,26 +67,15 @@ border-radius:30px;
 text-align:center;
 font-weight:bold;
 cursor:pointer;
-transition:.3s;
-}
-.main-btn:hover{transform:scale(1.03)}
-
-/* SOCIAL PROOF */
-.social-proof{
-margin-top:15px;
-display:flex;
-justify-content:space-between;
-font-size:13px;
-opacity:.9;
 }
 
-/* LIVE LINE */
+/* SIGNUP LIVE TICKER */
 .signup-live{
 margin-top:15px;
 background:#000;
 border-radius:12px;
 overflow:hidden;
-height:34px;
+height:32px;
 display:flex;
 align-items:center;
 }
@@ -65,30 +84,16 @@ align-items:center;
 white-space:nowrap;
 display:inline-block;
 padding-left:100%;
-animation:ticker 14s linear infinite;
+animation:signupTicker 12s linear infinite;
+color:#00ff9d;
 font-size:13px;
 }
 
-@keyframes ticker{
+@keyframes signupTicker{
 0%{transform:translateX(0)}
 100%{transform:translateX(-100%)}
 }
 
-/* COLORS */
-.jio{color:#00a8ff}
-.airtel{color:#ff3b3b}
-.vi{color:#a020f0}
-
-/* INPUT */
-input{
-width:100%;
-padding:11px;
-margin-top:10px;
-border-radius:8px;
-border:none;
-}
-
-/* BOTTOM */
 .bottom-nav{
 position:fixed;
 bottom:0;
@@ -98,10 +103,8 @@ background:#000;
 display:flex;
 justify-content:space-around;
 padding:10px 0;
-font-size:12px;
 }
-
-.bottom-nav div{color:#aaa}
+.bottom-nav div{font-size:12px;color:#aaa}
 .bottom-nav .active{color:#ffd700}
 
 .loader{
@@ -115,33 +118,38 @@ font-size:20px;
 z-index:100;
 }
 
+.toggle{
+position:fixed;
+top:10px;
+left:10px;
+background:#ffd700;
+color:#000;
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+z-index:99;
+}
 </style>
 </head>
 
 <body>
 
+<div class="toggle" onclick="toggleMode()">Mode</div>
 <div id="loader" class="loader">Processing...</div>
 
 <!-- SIGNUP -->
 <div id="signup" class="screen show">
 <div style="padding:20px;margin-top:40px">
-
 <h2>Signup kare aur ₹180 Bonus paaye</h2>
 
-<input placeholder="+91 Phone" id="phoneInput">
-<input placeholder="Password">
-<input placeholder="Referral Code">
-<input placeholder="Enter OTP">
+<input placeholder="+91 Phone" style="width:100%;padding:10px;margin-top:10px">
+<input placeholder="Password" style="width:100%;padding:10px;margin-top:10px">
+<input placeholder="Referral Code" style="width:100%;padding:10px;margin-top:10px">
+<input placeholder="Enter OTP" style="width:100%;padding:10px;margin-top:10px">
 
 <div class="main-btn" onclick="signup()">Signup</div>
 
-<!-- SOCIAL PROOF -->
-<div class="social-proof">
-<div>Users Online: <b id="onlineCount">128</b></div>
-<div>Today Rewards: <b id="rewardCount">532</b></div>
-</div>
-
-<!-- LIVE -->
+<!-- LIVE SIGNUP LINE -->
 <div class="signup-live">
 <span id="signupLiveText">Loading...</span>
 </div>
@@ -151,44 +159,48 @@ z-index:100;
 
 <!-- HOME -->
 <div id="home" class="screen">
-<div style="padding:20px">
-<h2>Wallet Balance</h2>
-<h1 id="balance">₹0</h1>
+<div class="header">
+Wallet Balance
+<div class="balance" id="balance">₹0</div>
+<div class="bell" onclick="toggleNotify()">🔔</div>
+</div>
+
+<div style="padding:12px">
+<input placeholder="Enter Mobile Number" style="width:100%;padding:10px">
+
+<select style="width:100%;padding:10px;margin-top:10px">
+<option>Select SIM</option>
+<option>Jio</option>
+<option>Airtel</option>
+<option>Vi</option>
+</select>
+
+<div class="main-btn" onclick="fakeLoad()">Recharge</div>
 </div>
 </div>
 
 <div class="bottom-nav">
-<div class="active" onclick="nav('signup',this)">Signup</div>
-<div onclick="nav('home',this)">Home</div>
+<div class="active" onclick="nav('home',this)">Home</div>
+<div onclick="nav('signup',this)">Signup</div>
 </div>
 
-<!-- SOUND -->
-<audio id="signupSound">
-<source src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg">
-</audio>
-
 <script>
-
 let bal=0;
 
 function signup(){
-signupSound.play();
-
-loader.style.display="flex";
-
+fakeLoad();
 setTimeout(()=>{
-loader.style.display="none";
 showScreen("home");
-
 let i=setInterval(()=>{
-if(bal<180){
-bal++;
-balance.innerText="₹"+bal;
-}
+if(bal<180){bal++;balance.innerText="₹"+bal}
 else clearInterval(i);
-},15);
-
+},20);
 },1200);
+}
+
+function fakeLoad(){
+loader.style.display="flex";
+setTimeout(()=>loader.style.display="none",1200);
 }
 
 function showScreen(id){
@@ -202,39 +214,26 @@ document.querySelectorAll(".bottom-nav div").forEach(d=>d.classList.remove("acti
 el.classList.add("active");
 }
 
-/* SOCIAL PROOF COUNTER */
-setInterval(()=>{
-onlineCount.innerText=120+Math.floor(Math.random()*20);
-rewardCount.innerText=500+Math.floor(Math.random()*80);
-},4000);
+function toggleMode(){
+document.body.classList.toggle("light");
+}
 
-/* LIVE DATA */
-const names=["Riya","Pooja","Anjali","Sneha","Kiran","Rahul","Aman","Rohit"];
+/* SIGNUP LIVE DATA */
+const names=[
+"Riya","Pooja","Anjali","Sneha","Kiran",
+"Rahul","Aman","Rohit","Vikas","Ankit"
+];
 const sims=["Jio","Airtel","Vi"];
 
-function maskNumber(){
-let num=""+Math.floor(6000000000+Math.random()*3000000000);
-return num.slice(0,4)+"****"+num.slice(8);
-}
-
-function updateLive(){
-
+function updateSignupLive(){
 let name=names[Math.floor(Math.random()*names.length)];
 let sim=sims[Math.floor(Math.random()*sims.length)];
-let number=maskNumber();
-
-let colorClass=
-sim=="Jio"?"jio":
-sim=="Airtel"?"airtel":"vi";
-
-signupLiveText.innerHTML=
-name+" "+number+" Recharge Success - <span class='"+colorClass+"'>"+sim+"</span>";
-
+signupLiveText.innerText=
+name+" Recharge Successfully - "+sim;
 }
 
-updateLive();
-setInterval(updateLive,3000);
-
+updateSignupLive();
+setInterval(updateSignupLive,3000);
 </script>
 
 </body>
