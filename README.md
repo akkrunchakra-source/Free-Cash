@@ -2,17 +2,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wallet Platform</title>
+<title>Free-Cash - Earn & Recharge</title>
 
 <style>
 *{box-sizing:border-box;}
 body{
     margin:0;
     font-family:Arial, sans-serif;
-    overflow:hidden;
+    overflow-x:hidden;
+    padding-bottom:70px;       /* bottom nav के लिए space */
 }
 
-.screen{ height:var(--vh); }
+.screen{ 
+    min-height: calc(100vh - 70px); 
+}
 
 /* SIGNUP */
 #signup{
@@ -22,6 +25,7 @@ body{
     display:flex;
     flex-direction:column;
     justify-content:center;
+    min-height:100vh;
 }
 #signup input{
     width:100%;
@@ -43,10 +47,11 @@ body{
     font-weight:bold;
 }
 
-/* WALLET */
+/* WALLET / WITHDRAW */
 #withdraw{
     display:none;
     background:#fff;
+    min-height: calc(100vh - 70px);
 }
 .header{
     background:#ffd700;
@@ -108,7 +113,7 @@ input,select{
 
 /* LIVE DEMO */
 .live-box{
-    margin-top:15px;
+    margin:15px 10px;
     border-radius:12px;
     overflow:hidden;
 }
@@ -121,9 +126,7 @@ input,select{
     text-align:center;
 }
 
-.live-time{
-    font-size:12px;
-}
+.live-time{font-size:12px;}
 
 .live-indicator{
     color:#00ff00;
@@ -189,36 +192,46 @@ input,select{
     border-radius:20px;
     font-weight:bold;
 }
-    /* ===== EARN OPTIONS ===== */
-.earn-options{
-    margin:12px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+
+/* ===== BOTTOM NAVIGATION ===== */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: #111;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #333;
+    z-index: 1000;
+    box-shadow: 0 -3px 10px rgba(0,0,0,0.5);
 }
 
-.earn-box{
-    padding:14px;
-    text-align:center;
-    font-weight:bold;
-    border-radius:8px;
-    color:#fff;
-    font-size:15px;
-    animation:blink 1.5s infinite;
+.nav-item {
+    flex: 1;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px 4px;
+    text-decoration: none;
+    transition: all 0.2s;
 }
 
-.earn-box.red{
-    background:linear-gradient(90deg,#ff416c,#ff4b2b);
+.nav-item:hover {
+    transform: scale(1.08);
 }
 
-.earn-box.green{
-    background:linear-gradient(90deg,#11998e,#38ef7d);
-}
+.nav-item.home    { background: #e74c3c; } /* Red */
+.nav-item.earn    { background: #3498db; } /* Blue */
+.nav-item.watch   { background: #2ecc71; } /* Green */
+.nav-item.data    { background: #9b59b6; } /* Purple */
 
-@keyframes blink{
-    0%{opacity:1}
-    50%{opacity:0.7}
-    100%{opacity:1}
+.nav-item.active {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255,255,255,0.2);
 }
 </style>
 </head>
@@ -226,12 +239,14 @@ input,select{
 <body>
 
 <div id="signup" class="screen">
-    <h2>पैसे कमाने के साथ Free Mobile reacharge Data Earn करने के लिए अपना Account Sign-up‌ करें पहला Bonus Free For New User</h2>
+    <h2>पैसे कमाने के साथ Free Mobile recharge Data Earn करने के लिए अपना Account Sign-up करें पहला Bonus Free For New User</h2>
     <input placeholder="+91 Phone">
     <input type="text" placeholder="Password">
     <input placeholder="Referral Code">
     <input placeholder="Verify Code">
     <button class="signup-btn" onclick="showSignupPopup()">Signup - Click Here</button>
+
+    <!-- Earn options को signup screen पर भी दिखा सकते हो अगर चाहो, लेकिन अभी bottom nav से replace कर दिया -->
 </div>
 
 <div id="withdraw" class="screen">
@@ -283,13 +298,15 @@ input,select{
     </div>
 
 </div>
-<!-- EARN OPTIONS -->
-<div class="earn-options">
-   <div class="earn-box red">Earn Money</div>
-   <div class="earn-box green">Free Mobile Recharge</div>
-   <div class="earn-box red">Watch and Earn Money</div>
-   <div class="earn-box green">Share Earn Money</div>
+
+<!-- BOTTOM NAVIGATION BAR -->
+<div class="bottom-nav">
+    <a href="#" class="nav-item nav-item home active">Home</a>
+    <a href="#" class="nav-item nav-item earn">Earn Money</a>
+    <a href="#" class="nav-item nav-item watch">Watch And Earn</a>
+    <a href="#" class="nav-item nav-item data">Free Data Earn</a>
 </div>
+
 <!-- POPUPS -->
 <div id="signupPopup" class="popup-bg">
     <div class="popup-box">
@@ -300,14 +317,12 @@ input,select{
 
 <div id="rechargePopup" class="popup-bg">
     <div class="popup-box">
-      Jio: Recharge successful.
-
-Voucher: ₹19 Data Add-on
-Benefits: 1GB High Speed Data
-Validity: 1 Day or till active base plan validity (whichever applicable)
-
-Check balance on MyJio App.
-Thank you for choosing Jio.<br>
+      Jio: Recharge successful.<br>
+      Voucher: ₹19 Data Add-on<br>
+      Benefits: 1GB High Speed Data<br>
+      Validity: 1 Day or till active base plan validity<br>
+      Check balance on MyJio App.<br>
+      Thank you for choosing Jio.<br>
         <button onclick="backHome()">Back</button>
     </div>
 </div>
@@ -323,18 +338,12 @@ setVH(); window.addEventListener('resize', setVH);
 /* CLOCK */
 setInterval(()=>{
  let now=new Date();
- document.getElementById("liveClock").innerText=
- now.toLocaleTimeString();
+ document.getElementById("liveClock").innerText = now.toLocaleTimeString();
 },1000);
 
 /* RANDOM LIVE LIST */
-const names=[
-"Rahul Kumar","Annu Sharma","Parul Kha","Anil Kumar",
-"Rajat Dhan","Gorav Kashyap","Arun Singh",
-"Pooja Sharma","Pooja Singh","Pihu Pal","Ritika Tanu"
-];
-
-const operators=["Jio","Airtel"];
+const names = ["Rahul Kumar","Annu Sharma","Parul Kha","Anil Kumar","Rajat Dhan","Gorav Kashyap","Arun Singh","Pooja Sharma","Pooja Singh","Pihu Pal","Ritika Tanu"];
+const operators = ["Jio","Airtel"];
 
 function randomNumber(){
  return Math.floor(6000000000 + Math.random()*3000000000)
@@ -342,10 +351,10 @@ function randomNumber(){
 }
 
 function addLive(){
- let name=names[Math.floor(Math.random()*names.length)];
- let op=operators[Math.floor(Math.random()*operators.length)];
- let li=document.createElement("li");
- li.innerText=`${name} - ${randomNumber()} / ${op} Successfully Recharge`;
+ let name = names[Math.floor(Math.random()*names.length)];
+ let op = operators[Math.floor(Math.random()*operators.length)];
+ let li = document.createElement("li");
+ li.innerText = `${name} - ${randomNumber()} / ${op} Successfully Recharge`;
  document.getElementById("liveList").appendChild(li);
 }
 
@@ -354,35 +363,42 @@ setInterval(addLive,2000);
 
 /* FUNCTIONS */
 function showSignupPopup(){
- signupPopup.style.display="flex";
+ document.getElementById("signupPopup").style.display="flex";
 }
 function goWithdraw(){
- signupPopup.style.display="none";
- signup.style.display="none";
- withdraw.style.display="block";
+ document.getElementById("signupPopup").style.display="none";
+ document.getElementById("signup").style.display="none";
+ document.getElementById("withdraw").style.display="block";
 }
 function openTab(id,el){
- document.querySelectorAll(".tab-content")
- .forEach(t=>t.classList.add("hidden"));
+ document.querySelectorAll(".tab-content").forEach(t=>t.classList.add("hidden"));
  document.getElementById(id).classList.remove("hidden");
- document.querySelectorAll(".tab")
- .forEach(t=>t.classList.remove("active"));
+ document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
  el.classList.add("active");
 }
 function selectAmount(el){
- document.querySelectorAll(".amount-btn")
- .forEach(btn=>btn.classList.remove("selected"));
+ document.querySelectorAll(".amount-btn").forEach(btn=>btn.classList.remove("selected"));
  el.classList.add("selected");
 }
 function showRechargeSuccess(){
- rechargePopup.style.display="flex";
- successSound.play();
+ document.getElementById("rechargePopup").style.display="flex";
+ document.getElementById("successSound").play();
 }
 function backHome(){
- rechargePopup.style.display="none";
- withdraw.style.display="none";
- signup.style.display="flex";
+ document.getElementById("rechargePopup").style.display="none";
+ document.getElementById("withdraw").style.display="none";
+ document.getElementById("signup").style.display="flex";
 }
+
+/* Optional: Bottom nav click effect (active class change) */
+document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        // यहाँ बाद में अलग-अलग sections दिखाने का code डाल सकते हो
+    });
+});
 </script>
 
 </body>
