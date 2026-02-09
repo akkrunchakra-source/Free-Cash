@@ -10,6 +10,7 @@ body{
 font-family:Arial;
 background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);
 color:#fff;
+transition:.4s;
 overflow:hidden;
 }
 .light{background:#f2f2f2;color:#000}
@@ -59,39 +60,13 @@ border-bottom:1px solid #333;
 }
 
 .main-btn{
-margin-top:12px;
+margin-top:10px;
 padding:14px;
 background:#ffd700;
 color:#000;
 border-radius:30px;
 text-align:center;
 font-weight:bold;
-cursor:pointer;
-}
-
-/* SIGNUP LIVE TICKER */
-.signup-live{
-margin-top:15px;
-background:#000;
-border-radius:12px;
-overflow:hidden;
-height:32px;
-display:flex;
-align-items:center;
-}
-
-.signup-live span{
-white-space:nowrap;
-display:inline-block;
-padding-left:100%;
-animation:signupTicker 12s linear infinite;
-color:#00ff9d;
-font-size:13px;
-}
-
-@keyframes signupTicker{
-0%{transform:translateX(0)}
-100%{transform:translateX(-100%)}
 }
 
 .bottom-nav{
@@ -118,28 +93,33 @@ font-size:20px;
 z-index:100;
 }
 
-.toggle{
-position:fixed;
-top:10px;
-left:10px;
-background:#ffd700;
-color:#000;
-padding:6px 12px;
-border-radius:20px;
-font-size:12px;
-z-index:99;
+/* 🔥 SIGNUP LIVE LINE */
+.signup-live{
+margin-top:15px;
+background:#000;
+border-radius:12px;
+padding:8px;
+text-align:center;
+font-size:13px;
+color:#00ff9d;
+animation:blink 1.2s infinite;
 }
+
+@keyframes blink{
+50%{opacity:.7}
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="toggle" onclick="toggleMode()">Mode</div>
 <div id="loader" class="loader">Processing...</div>
 
 <!-- SIGNUP -->
 <div id="signup" class="screen show">
 <div style="padding:20px;margin-top:40px">
+
 <h2>Signup kare aur ₹180 Bonus paaye</h2>
 
 <input placeholder="+91 Phone" style="width:100%;padding:10px;margin-top:10px">
@@ -149,7 +129,7 @@ z-index:99;
 
 <div class="main-btn" onclick="signup()">Signup</div>
 
-<!-- LIVE SIGNUP LINE -->
+<!-- ✅ LIVE FREE RECHARGE -->
 <div class="signup-live">
 <span id="signupLiveText">Loading...</span>
 </div>
@@ -162,20 +142,6 @@ z-index:99;
 <div class="header">
 Wallet Balance
 <div class="balance" id="balance">₹0</div>
-<div class="bell" onclick="toggleNotify()">🔔</div>
-</div>
-
-<div style="padding:12px">
-<input placeholder="Enter Mobile Number" style="width:100%;padding:10px">
-
-<select style="width:100%;padding:10px;margin-top:10px">
-<option>Select SIM</option>
-<option>Jio</option>
-<option>Airtel</option>
-<option>Vi</option>
-</select>
-
-<div class="main-btn" onclick="fakeLoad()">Recharge</div>
 </div>
 </div>
 
@@ -185,22 +151,23 @@ Wallet Balance
 </div>
 
 <script>
+
 let bal=0;
 
 function signup(){
-fakeLoad();
-setTimeout(()=>{
-showScreen("home");
-let i=setInterval(()=>{
-if(bal<180){bal++;balance.innerText="₹"+bal}
-else clearInterval(i);
-},20);
-},1200);
-}
-
-function fakeLoad(){
 loader.style.display="flex";
-setTimeout(()=>loader.style.display="none",1200);
+setTimeout(()=>{
+loader.style.display="none";
+showScreen("home");
+
+let i=setInterval(()=>{
+if(bal<180){
+bal++;
+balance.innerText="₹"+bal;
+}else clearInterval(i);
+},20);
+
+},1200);
 }
 
 function showScreen(id){
@@ -214,26 +181,23 @@ document.querySelectorAll(".bottom-nav div").forEach(d=>d.classList.remove("acti
 el.classList.add("active");
 }
 
-function toggleMode(){
-document.body.classList.toggle("light");
+/* 🔥 LIVE FREE RECHARGE DATA */
+const girls=["Riya","Pooja","Anjali","Sneha","Kajal","Neha"];
+const boys=["Rahul","Ankit","Rohit","Aman","Vikas","Sahil"];
+
+function randomName(){
+let all=[...girls,...boys];
+return all[Math.floor(Math.random()*all.length)];
 }
 
-/* SIGNUP LIVE DATA */
-const names=[
-"Riya","Pooja","Anjali","Sneha","Kiran",
-"Rahul","Aman","Rohit","Vikas","Ankit"
-];
-const sims=["Jio","Airtel","Vi"];
-
 function updateSignupLive(){
-let name=names[Math.floor(Math.random()*names.length)];
-let sim=sims[Math.floor(Math.random()*sims.length)];
 signupLiveText.innerText=
-name+" Recharge Successfully - "+sim;
+randomName()+" - Free Recharge Successfully";
 }
 
 updateSignupLive();
-setInterval(updateSignupLive,3000);
+setInterval(updateSignupLive,1200);
+
 </script>
 
 </body>
