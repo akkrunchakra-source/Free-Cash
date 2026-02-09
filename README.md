@@ -22,16 +22,17 @@ body{margin:0; font-family:Arial, sans-serif; overflow-x:hidden; padding-bottom:
 .balance{font-size:24px; font-weight:bold;}
 
 .tabs{display:flex; justify-content:space-around; border-bottom:1px solid #ddd;}
-.tab{padding:10px; font-weight:bold;}
+.tab{padding:10px; font-weight:bold; cursor:pointer;}
 .tab.active{border-bottom:2px solid #ffd700;}
 .tab-content{padding:10px;}
 .hidden{display:none;}
 
-input, select{width:100%; padding:10px; margin:6px 0;}
-.amount-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
-.amount-btn{padding:12px; border:1px solid #ddd; text-align:center; cursor:pointer;}
-.amount-btn.selected{border:2px solid #ffd700; background:#fff8cc; font-weight:bold; position:relative;}
-.amount-btn.selected::after{content:"✔"; position:absolute; top:4px; right:6px; color:green;}
+input, select{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; border-radius:6px; font-size:16px;}
+
+.amount-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:10px 0;}
+.amount-btn{padding:14px; border:1px solid #ddd; text-align:center; border-radius:8px; cursor:pointer; background:#f8f8f8; font-weight:bold;}
+.amount-btn.selected{border:2px solid #2ecc71; background:#e8f5e9; position:relative;}
+.amount-btn.selected::after{content:"✔"; position:absolute; top:5px; right:8px; color:#2ecc71; font-size:18px;}
 
 .withdraw-btn{background:#ffd700; padding:14px; text-align:center; font-weight:bold; margin:15px 10px; border-radius:8px; cursor:pointer;}
 
@@ -73,7 +74,7 @@ input, select{width:100%; padding:10px; margin:6px 0;}
 
 <body>
 
-<!-- Signup Page (शुरू में दिखेगा) -->
+<!-- Signup Page -->
 <div id="signup">
     <h2>पैसे कमाने के साथ Free Mobile recharge Data Earn करने के लिए अपना Account Sign-up करें पहला Bonus Free For New User</h2>
     <input placeholder="+91 Phone">
@@ -83,7 +84,7 @@ input, select{width:100%; padding:10px; margin:6px 0;}
     <button class="signup-btn" onclick="showSignupPopup()">Signup - Click Here</button>
 </div>
 
-<!-- Wallet Page (signup के बाद दिखेगा) -->
+<!-- Wallet Page -->
 <div id="withdraw">
     <div class="header">
         <div>Wallet Balance</div>
@@ -91,23 +92,36 @@ input, select{width:100%; padding:10px; margin:6px 0;}
     </div>
 
     <div class="tabs">
-        <div class="tab active">Paytm</div>
-        <div class="tab">Recharge</div>
+        <div class="tab active" onclick="openTab('paytm', this)">Paytm</div>
+        <div class="tab" onclick="openTab('recharge', this)">Recharge</div>
     </div>
 
-    <div class="tab-content">
+    <!-- Paytm Tab -->
+    <div id="paytm" class="tab-content">
         <input value="3352585xxx05" readonly style="text-align:center; font-weight:bold;">
-        
+        <div class="withdraw-btn" onclick="alert('Withdraw processing... (Demo mode)')">Withdraw Now</div>
+    </div>
+
+    <!-- Recharge Tab (Restored with mobile + select + tick) -->
+    <div id="recharge" class="tab-content hidden">
+        <input id="mobileNum" placeholder="Enter your mobile number">
+        <select id="operatorSelect">
+            <option>Select SIM / Operator</option>
+            <option>Jio</option>
+            <option>Airtel</option>
+            <option>Vi</option>
+        </select>
+
         <div class="amount-grid">
-            <div class="amount-btn">₹19</div>
-            <div class="amount-btn">₹29</div>
-            <div class="amount-btn">₹69</div>
-            <div class="amount-btn">₹199</div>
-            <div class="amount-btn">₹299</div>
-            <div class="amount-btn">₹399</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹19</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹29</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹69</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹199</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹299</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹399</div>
         </div>
-        
-        <div class="withdraw-btn">Withdraw Now</div>
+
+        <div class="withdraw-btn" onclick="doRecharge()">Recharge Now</div>
     </div>
 
     <!-- Transaction History -->
@@ -147,19 +161,12 @@ input, select{width:100%; padding:10px; margin:6px 0;}
 <script>
 // Clock
 setInterval(() => {
-    let now = new Date();
-    document.getElementById("liveClock").innerText = now.toLocaleTimeString('en-IN', {hour12: false});
+    document.getElementById("liveClock").innerText = new Date().toLocaleTimeString('en-IN', {hour12: false});
 }, 1000);
 
-// Names & Operators
-const names = [
-    "Rahul Sharma", "Priya Singh", "Amit Kumar", "Neha Patel", "Vikram Yadav", "Anjali Verma",
-    "Rohan Gupta", "Sneha Joshi", "Sachin Mishra", "Pooja Reddy", "Arjun Mehta", "Kavita Nair",
-    "Deepak Tiwari", "Shreya Kapoor", "Manish Pandey", "Riya Banerjee", "Ajay Thakur", "Sonali Desai"
-];
-const operators = ["Jio", "Airtel", "Vi"];
-
 // Live Entries
+const names = ["Rahul Sharma", "Priya Singh", "Amit Kumar", "Neha Patel", "Vikram Yadav", "Anjali Verma", "Rohan Gupta", "Sneha Joshi", "Sachin Mishra", "Pooja Reddy"];
+const operators = ["Jio", "Airtel", "Vi"];
 function addLiveEntry() {
     const name = names[Math.floor(Math.random() * names.length)];
     const op = operators[Math.floor(Math.random() * operators.length)];
@@ -178,29 +185,61 @@ function loadTransactionHistory() {
     const amounts = [19, 29, 69, 199];
     for(let i = 0; i < 12; i++) {
         const amt = amounts[Math.floor(Math.random() * amounts.length)];
-        const time = new Date(Date.now() - i * 3600000 * (Math.random() + 1)).toLocaleString('en-IN', {dateStyle: 'medium', timeStyle: 'short'});
+        const time = new Date(Date.now() - i * 3600000).toLocaleString('en-IN', {dateStyle: 'medium', timeStyle: 'short'});
         const item = document.createElement("div");
         item.className = "transaction-item";
         item.innerHTML = `<span class="transaction-amount">₹${amt} Free Data</span> - ${time} - Activated Successfully`;
         list.appendChild(item);
     }
 }
-
 function toggleHistory() {
     const list = document.getElementById("historyList");
-    if (list.style.display === "block") {
-        list.style.display = "none";
-    } else {
-        if (list.children.length === 0) loadTransactionHistory();
-        list.style.display = "block";
-    }
+    list.style.display = (list.style.display === "block") ? "none" : "block";
+    if (list.children.length === 0) loadTransactionHistory();
 }
 
-// Signup Popup Functions
+// Tab Switch
+function openTab(tabId, el) {
+    document.querySelectorAll(".tab-content").forEach(t => t.classList.add("hidden"));
+    document.getElementById(tabId).classList.remove("hidden");
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    el.classList.add("active");
+}
+
+// Plan Select with Tick
+function selectPlan(el) {
+    document.querySelectorAll(".amount-btn").forEach(btn => btn.classList.remove("selected"));
+    el.classList.add("selected");
+}
+
+// Fake Recharge
+function doRecharge() {
+    const mobile = document.getElementById("mobileNum").value.trim();
+    const operator = document.getElementById("operatorSelect").value;
+    const selectedPlan = document.querySelector(".amount-btn.selected");
+    
+    if (!mobile || mobile.length < 10) {
+        alert("Please enter valid mobile number!");
+        return;
+    }
+    if (operator === "Select SIM / Operator") {
+        alert("Please select operator!");
+        return;
+    }
+    if (!selectedPlan) {
+        alert("Please select a plan!");
+        return;
+    }
+    
+    const amount = selectedPlan.innerText;
+    alert(`Recharge of ${amount} successful on \( {mobile} ( \){operator})! 🎉 (Demo)`);
+    // Optional: add to history or live
+}
+
+// Signup Functions
 function showSignupPopup() {
     document.getElementById("signupPopup").style.display = "flex";
 }
-
 function goToWallet() {
     document.getElementById("signupPopup").style.display = "none";
     document.getElementById("signup").style.display = "none";
@@ -209,7 +248,7 @@ function goToWallet() {
 
 // Bottom Nav Active
 document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', (e) => {
+    item.addEventListener('click', e => {
         e.preventDefault();
         document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
         item.classList.add('active');
