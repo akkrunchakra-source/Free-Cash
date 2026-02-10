@@ -92,8 +92,8 @@ input, select{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; bor
     </div>
 
     <div class="tabs">
-        <div class="tab active" onclick="openTab('paytm', this)">Paytm</div>
-        <div class="tab" onclick="openTab('recharge', this)">Free Recharge</div>
+        <div class="tab active" onclick="openTab('paytm', this)">Paytm/Add Bank Account</div>
+        <div class="tab" onclick="openTab('recharge', this)">Free Mobile Recharge</div>
     </div>
 
     <!-- Paytm Tab -->
@@ -110,11 +110,12 @@ input, select{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; bor
             <option>Jio</option>
             <option>Airtel</option>
             <option>Vi</option>
+            <option>Bsnl</option>
         </select>
 
         <div class="amount-grid">
-            <div class="amount-btn" onclick="selectPlan(this)">₹19</div>
-            <div class="amount-btn" onclick="selectPlan(this)">₹29</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹19-1GB DATA</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹29-2GB DATA</div>
             <div class="amount-btn" onclick="selectPlan(this)">₹69</div>
             <div class="amount-btn" onclick="selectPlan(this)">₹199</div>
             <div class="amount-btn" onclick="selectPlan(this)">₹299</div>
