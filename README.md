@@ -78,7 +78,7 @@ input, select{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; bor
 <div id="signup">
     <h2>पैसे कमाना और Free Mobile recharge Data Earn करने के लिए अपना Account Sign-up करें पहला Bonus Free For New User</h2>
     <input placeholder="+91 Phone">
-    <input type="password" placeholder="Password">
+    <input type="ararar22" placeholder="Password">
     <input placeholder="Referral Code">
     <input placeholder="Verify Code">
     <button class="signup-btn" onclick="showSignupPopup()">Signup - Click Here</button>
@@ -117,8 +117,8 @@ input, select{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; bor
             <div class="amount-btn" onclick="selectPlan(this)">₹19-1GB DATA</div>
             <div class="amount-btn" onclick="selectPlan(this)">₹29-2GB DATA</div>
             <div class="amount-btn" onclick="selectPlan(this)">₹69-6GB DATA</div>
-            <div class="amount-btn" onclick="selectPlan(this)">₹239-1.5GB DATA</div>
-            <div class="amount-btn" onclick="selectPlan(this)">₹299-1.5GB DATA</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹239-1.5GB/DATA</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹299-1.5GB/DATA</div>
             <div class="amount-btn" onclick="selectPlan(this)">₹399-5g/2GB/Day DATA</div>
         </div>
 
@@ -154,7 +154,7 @@ input, select{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; bor
 <!-- Signup Popup -->
 <div id="signupPopup" class="popup-bg">
     <div class="popup-box">
-        Congratulations! 🎉 🎉 Your Free ₹180 Bonus Unlocked Here. Check Withdrawal Wallet<br>
+        Congratulations! 🎉 🎉 Your Free ₹180 Bonus Unlocked Here. Check ✔️ Withdrawal Wallet<br>
         <button onclick="goToWallet()">OK</button>
     </div>
 </div>
