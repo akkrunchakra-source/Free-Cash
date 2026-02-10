@@ -76,7 +76,7 @@ input, select{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; bor
 
 <!-- Signup Page -->
 <div id="signup">
-    <h2>पैसे कमाने के साथ Free Mobile recharge Data Earn करने के लिए अपना Account Sign-up करें पहला Bonus Free For New User</h2>
+    <h2>पैसे कमाना और Free Mobile recharge Data Earn करने के लिए अपना Account Sign-up करें पहला Bonus Free For New User</h2>
     <input placeholder="+91 Phone">
     <input type="password" placeholder="Password">
     <input placeholder="Referral Code">
@@ -93,7 +93,7 @@ input, select{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; bor
 
     <div class="tabs">
         <div class="tab active" onclick="openTab('paytm', this)">Paytm</div>
-        <div class="tab" onclick="openTab('recharge', this)">Recharge</div>
+        <div class="tab" onclick="openTab('recharge', this)">Free Recharge</div>
     </div>
 
     <!-- Paytm Tab -->
