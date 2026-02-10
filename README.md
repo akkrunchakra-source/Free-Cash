@@ -234,9 +234,9 @@ function doRecharge() {
     
     const amount = selectedPlan.innerText;
     alert(`Jio: Dear Customer, your recharge of Rs.19
-is successful.
-1GB Data credited to your account.
-Valid till 11-Feb-2026.`);
+is successfully.
+1GB Data credited to your Jio Number.
+Valid till 12-Feb-2026.`);
     // Optional: add to history or live
 }
 
