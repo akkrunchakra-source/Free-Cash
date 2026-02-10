@@ -92,7 +92,7 @@ input, select{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; bor
     </div>
 
     <div class="tabs">
-        <div class="tab active" onclick="openTab('paytm', this)">Paytm/Add Bank Account</div>
+        <div class="tab active" onclick="openTab('paytm', this)">Add Bank Account</div>
         <div class="tab" onclick="openTab('recharge', this)">Free Mobile Recharge</div>
     </div>
 
@@ -110,16 +110,16 @@ input, select{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; bor
             <option>Jio</option>
             <option>Airtel</option>
             <option>Vi</option>
-            <option>Bsnl</option>
+            <option>BSNL</option>
         </select>
 
         <div class="amount-grid">
             <div class="amount-btn" onclick="selectPlan(this)">₹19-1GB DATA</div>
             <div class="amount-btn" onclick="selectPlan(this)">₹29-2GB DATA</div>
-            <div class="amount-btn" onclick="selectPlan(this)">₹69</div>
-            <div class="amount-btn" onclick="selectPlan(this)">₹199</div>
-            <div class="amount-btn" onclick="selectPlan(this)">₹299</div>
-            <div class="amount-btn" onclick="selectPlan(this)">₹399</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹69-6GB DATA</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹239-1.5GB DATA</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹299-1.5GB DATA</div>
+            <div class="amount-btn" onclick="selectPlan(this)">₹399-5g/2GB/Day DATA</div>
         </div>
 
         <div class="withdraw-btn" onclick="doRecharge()">Recharge Now</div>
