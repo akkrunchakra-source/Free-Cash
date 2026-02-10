@@ -99,7 +99,7 @@ input, select{width:100%; padding:12px; margin:8px 0; border:1px solid #ccc; bor
     <!-- Paytm Tab -->
     <div id="paytm" class="tab-content">
         <input value="3352585xxx05" readonly style="text-align:center; font-weight:bold;">
-        <div class="withdraw-btn" onclick="alert('Withdraw processing... (Demo mode)')">Withdraw Now</div>
+        <div class="withdraw-btn" onclick="alert('Withdraw processing... Please Wait)')">Withdraw Now</div>
     </div>
 
     <!-- Recharge Tab (Restored with mobile + select + tick) -->
@@ -233,7 +233,10 @@ function doRecharge() {
     }
     
     const amount = selectedPlan.innerText;
-    alert(`Recharge of ${amount} successful on \( {mobile} ( \){operator})! 🎉 (Demo)`);
+    alert(`Jio: Dear Customer, your recharge of Rs.19
+is successful.
+1GB Data credited to your account.
+Valid till 11-Feb-2026.`);
     // Optional: add to history or live
 }
 
