@@ -11,7 +11,8 @@ body{margin:0;font-family:Arial,sans-serif;padding-bottom:80px}
 /* Signup */
 #signup{background:#000;color:#fff;padding:20px;min-height:100vh}
 #signup input{width:100%;padding:14px;margin:8px 0;background:#222;border:none;border-radius:8px;color:#fff}
-.signup-btn{padding:16px;background:red;border:none;border-radius:30px;color:#fff;font-weight:bold}
+.signup-btn{padding:16px;background:red;border:none;border-radius:30px;color:#fff;font-weight:bold;width:100%}
+.otp-btn{padding:12px;background:#ffd700;border:none;border-radius:20px;font-weight:bold;width:100%;margin-top:5px}
 
 /* Wallet */
 #withdraw{display:none}
@@ -37,17 +38,21 @@ input,select{width:100%;padding:12px;margin:8px 0;border-radius:6px;border:1px s
 
 /* Transaction */
 .transaction-section{margin-top:15px;background:#f9f9f9;border-radius:12px;overflow:hidden}
-.transaction-header{background:#333;color:#fff;padding:12px;text-align:center;cursor:pointer}
-.transaction-list{display:none;max-height:250px;overflow:auto}
-.transaction-item{padding:10px;border-bottom:1px solid #eee;font-size:14px}
+.transaction-header{background:#333;color:#fff;padding:12px;text-align:center;font-weight:bold}
+.transaction-list{max-height:300px;overflow:auto}
+.transaction-item{
+padding:10px;
+border-bottom:1px solid #eee;
+font-size:14px;
+font-weight:bold
+}
 
 /* Live Recharge */
 .live-box{margin:15px;border-radius:12px;overflow:hidden}
-.live-header{background:linear-gradient(90deg,#ff0080,#ff8c00,#40e0d0);color:#fff;padding:10px;text-align:center}
+.live-header{background:linear-gradient(90deg,#ff0080,#ff8c00,#40e0d0);color:#fff;padding:10px;text-align:center;font-weight:bold}
 .live-list{height:140px;background:#000;color:#00ff9d;overflow:hidden}
-.live-list ul{list-style:none;padding:0;margin:0;animation:scroll 12s linear infinite}
+.live-list ul{list-style:none;padding:0;margin:0}
 .live-list li{padding:8px 12px;border-bottom:1px solid #222}
-@keyframes scroll{0%{transform:translateY(100%)}100%{transform:translateY(-100%)}}
 
 /* Bottom Nav */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:70px;display:flex;background:#111}
@@ -64,7 +69,7 @@ display:flex;align-items:center;justify-content:center;margin:10px auto;animatio
 .tick::after{content:"✔";font-size:40px;color:#2ecc71}
 @keyframes pop{0%{transform:scale(.3)}100%{transform:scale(1)}}
 
-button{padding:10px 20px;border:none;border-radius:20px;font-weight:bold}
+button{cursor:pointer}
 </style>
 </head>
 
@@ -73,10 +78,15 @@ button{padding:10px 20px;border:none;border-radius:20px;font-weight:bold}
 <!-- Signup -->
 <div id="signup">
 <h2>Free Mobile Recharge & Cash Earn</h2>
-<input placeholder="+91 Mobile">
-<input placeholder="Password">
-<input placeholder="Referral Code">
-<button class="signup-btn" onclick="showSignupPopup()">Signup</button>
+
+<input id="suMobile" placeholder="+91 Mobile">
+<input id="suPass" placeholder="Password" type="password">
+<input id="suRef" placeholder="Referral Code">
+
+<button class="otp-btn" onclick="sendOTP()">Send OTP</button>
+<input id="suOtp" placeholder="Enter OTP">
+
+<button class="signup-btn" onclick="verifySignup()">Signup</button>
 </div>
 
 <!-- Wallet -->
@@ -100,16 +110,17 @@ button{padding:10px 20px;border:none;border-radius:20px;font-weight:bold}
 
 <!-- Recharge -->
 <div id="recharge" class="tab-content hidden">
-<input placeholder="Mobile Number">
-<select>
-<option>Select Operator</option>
-<option>Jio</option><option>Airtel</option><option>Vi</option>
+<input id="recMobile" placeholder="Mobile Number">
+<select id="operator">
+<option>Jio</option>
+<option>Airtel</option>
+<option>Vi</option>
 </select>
 
 <div class="amount-grid">
-<div class="amount-btn" onclick="selectPlan(this)">₹19 - 1GB</div>
-<div class="amount-btn" onclick="selectPlan(this)">₹29 - 2GB</div>
-<div class="amount-btn" onclick="selectPlan(this)">₹69 - 6GB</div>
+<div class="amount-btn" onclick="selectPlan(this)">₹19</div>
+<div class="amount-btn" onclick="selectPlan(this)">₹29</div>
+<div class="amount-btn" onclick="selectPlan(this)">₹69</div>
 </div>
 
 <div class="withdraw-btn" onclick="doRecharge()">Recharge Now</div>
@@ -118,12 +129,8 @@ button{padding:10px 20px;border:none;border-radius:20px;font-weight:bold}
 <!-- Transaction -->
 <div id="transaction" class="tab-content hidden">
 <div class="transaction-section">
-<div class="transaction-header" onclick="toggleTxn()">Recharge History</div>
-<div class="transaction-list" id="txnList">
-<div class="transaction-item">Jio • ₹19 • Success</div>
-<div class="transaction-item">Airtel • ₹29 • Success</div>
-<div class="transaction-item">Vi • ₹69 • Success</div>
-</div>
+<div class="transaction-header">Recharge History</div>
+<div class="transaction-list" id="txnList"></div>
 </div>
 </div>
 
@@ -131,11 +138,7 @@ button{padding:10px 20px;border:none;border-radius:20px;font-weight:bold}
 <div class="live-box">
 <div class="live-header">LIVE Recharge</div>
 <div class="live-list">
-<ul id="liveList">
-<li>+91 98****4321 recharged ₹19</li>
-<li>+91 87****1123 recharged ₹29</li>
-<li>+91 76****9988 recharged ₹69</li>
-</ul>
+<ul id="liveList"></ul>
 </div>
 </div>
 </div>
@@ -159,7 +162,7 @@ button{padding:10px 20px;border:none;border-radius:20px;font-weight:bold}
 <!-- Recharge Popup -->
 <div id="rechargePopup" class="popup-bg">
 <div class="popup-box">
-<div class="jio-logo">Jio</div>
+<div class="jio-logo" id="popOp">Jio</div>
 <div class="tick"></div>
 Recharge Successful 🎉<br><br>
 <button onclick="closeRecharge()">OK</button>
@@ -167,6 +170,22 @@ Recharge Successful 🎉<br><br>
 </div>
 
 <script>
+let demoOTP = "1234";
+let selectedAmount = "19";
+
+/* OTP */
+function sendOTP(){
+alert("Demo OTP sent: 1234");
+}
+function verifySignup(){
+if(suOtp.value === demoOTP){
+signupPopup.style.display="flex";
+}else{
+alert("Invalid OTP");
+}
+}
+
+/* Tabs */
 function openTab(id,el){
 document.querySelectorAll('.tab-content').forEach(t=>t.classList.add('hidden'));
 document.getElementById(id).classList.remove('hidden');
@@ -174,33 +193,52 @@ document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
 el.classList.add('active');
 }
 
+/* Plans */
 function selectPlan(el){
 document.querySelectorAll('.amount-btn').forEach(b=>b.classList.remove('selected'));
 el.classList.add('selected');
+selectedAmount = el.innerText.replace("₹","");
 }
 
-function toggleTxn(){
-txnList.style.display = txnList.style.display==="block"?"none":"block";
-}
-
-function showSignupPopup(){signupPopup.style.display="flex"}
+/* Signup */
 function goToWallet(){
 signup.style.display="none";
 signupPopup.style.display="none";
 withdraw.style.display="block";
 }
 
+/* Recharge */
 function doRecharge(){
+let op = operator.value;
+let now = new Date();
+let time = now.toLocaleTimeString('en-IN');
+let date = now.toLocaleDateString('en-IN');
+
+popOp.innerText = op;
 rechargePopup.style.display="flex";
 playSound();
+
+/* Transaction add */
+let txn = document.createElement("div");
+txn.className="transaction-item";
+txn.innerHTML = `${op} • ₹${selectedAmount} • SUCCESS<br>${date} ${time}`;
+txnList.prepend(txn);
+
+/* Live list add */
+let li = document.createElement("li");
+li.innerText = `+91 **** recharged ₹${selectedAmount} (${op})`;
+liveList.prepend(li);
 }
 
 function closeRecharge(){rechargePopup.style.display="none"}
 
+/* Sound */
 function playSound(){
 let c=new(AudioContext||webkitAudioContext)();
 let o=c.createOscillator();
-o.frequency.value=900;o.connect(c.destination);o.start();
+o.frequency.value=900;
+o.connect(c.destination);
+o.start();
 setTimeout(()=>o.stop(),150);
 }
 </script>
