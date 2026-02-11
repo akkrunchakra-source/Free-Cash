@@ -75,6 +75,7 @@ button{padding:10px 20px;border:none;border-radius:20px;font-weight:bold}
 <h2>Free Mobile Recharge & Cash Earn</h2>
 <input placeholder="+91 Mobile">
 <input placeholder="Password">
+<input placeholder="Enter OTP">
 <input placeholder="Referral Code">
 <button class="signup-btn" onclick="showSignupPopup()">Signup</button>
 </div>
