@@ -77,6 +77,40 @@ display:flex;align-items:center;justify-content:center;margin:10px auto;animatio
 @keyframes pop{0%{transform:scale(.3)}100%{transform:scale(1)}}
 
 button{padding:10px 20px;border:none;border-radius:20px;font-weight:bold}
+  
+  /* INSTALL SECTION */
+.install-box{
+text-align:center;
+padding:20px;
+background:#111;
+margin:15px;
+border-radius:12px;
+}
+
+.install-text{
+font-weight:bold;
+color:#fff;
+font-size:16px;
+margin-bottom:15px;
+}
+
+.install-btn{
+padding:14px 30px;
+font-size:16px;
+font-weight:bold;
+border:none;
+border-radius:30px;
+background:linear-gradient(45deg,#00ff9d,#00c3ff);
+color:#000;
+cursor:pointer;
+animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
+}
 </style>
 </head>
 
