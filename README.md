@@ -240,21 +240,6 @@ el.classList.add('selected');
 function toggleTxn(){
 txnList.style.display = txnList.style.display==="block"?"none":"block";
 }
-function validateSignup(){
-
-let inputs = document.querySelectorAll("#signup input");
-let mobile = inputs[0].value.trim();
-let password = inputs[1].value.trim();
-
-if(mobile === "" || password === ""){
-alert("Please fill all required details!");
-return;
-}
-
-if(mobile.length !== 10){
-alert("Enter valid 10 digit mobile number");
-return;
-}
   
 function showSignupPopup(){signupPopup.style.display="flex"}
 function goToWallet(){
