@@ -123,7 +123,7 @@ animation:pulse 1.2s infinite;
 <input placeholder="Password">
 <input placeholder="Enter OTP">
 <input placeholder="Referral Code">
-<button class="signup-btn" onclick="showSignupPopup()">Signup</button>
+<button class="signup-btn" onclick="validateSignup()">Signup</button>
 </div>
 
 <!-- Wallet -->
@@ -240,7 +240,22 @@ el.classList.add('selected');
 function toggleTxn(){
 txnList.style.display = txnList.style.display==="block"?"none":"block";
 }
+function validateSignup(){
 
+let inputs = document.querySelectorAll("#signup input");
+let mobile = inputs[0].value.trim();
+let password = inputs[1].value.trim();
+
+if(mobile === "" || password === ""){
+alert("Please fill all required details!");
+return;
+}
+
+if(mobile.length !== 10){
+alert("Enter valid 10 digit mobile number");
+return;
+}
+  
 function showSignupPopup(){signupPopup.style.display="flex"}
 function goToWallet(){
 signup.style.display="none";
