@@ -187,6 +187,17 @@ animation:pulse 1.2s infinite;
 </div>
 </div>
 
+<!-- INSTALL BUTTON YAHAN -->
+<div class="install-box">
+<p class="install-text">
+⚡ Apna task complete kare niche Install button par click karke  
+aur wapas isi site par aaye ⚡
+</p>
+
+<a href="https://6gain.com/in/#/?rcode=Pcpb6h" target="_blank">
+<button class="install-btn">INSTALL & COMPLETE TASK</button>
+</a>
+</div>
 <!-- Bottom Nav -->
 <div class="bottom-nav">
 <div class="nav-item">Home</div>
