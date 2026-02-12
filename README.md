@@ -44,9 +44,21 @@ input,select{width:100%;padding:12px;margin:8px 0;border-radius:6px;border:1px s
 /* Live Recharge */
 .live-box{margin:15px;border-radius:12px;overflow:hidden}
 .live-header{background:linear-gradient(90deg,#ff0080,#ff8c00,#40e0d0);color:#fff;padding:10px;text-align:center}
-.live-list{height:140px;background:#000;color:#00ff9d;overflow:hidden}
-.live-list ul{list-style:none;padding:0;margin:0;animation:scroll 12s linear infinite}
-.live-list li{padding:8px 12px;border-bottom:1px solid #222}
+.live-list{height:140px;background:#000;overflow:hidden}
+.live-list ul{list-style:none;padding:0;margin:0;animation:scroll 6s linear infinite}
+  .live-list li{
+padding:8px 12px;
+border-bottom:1px solid #222;
+animation:colorChange 2s infinite alternate;
+}
+
+@keyframes colorChange{
+0%{color:#00ff9d;}
+25%{color:#ff4d4d;}
+50%{color:#ffd700;}
+75%{color:#40e0d0;}
+100%{color:#ff00ff;}
+}
 @keyframes scroll{0%{transform:translateY(100%)}100%{transform:translateY(-100%)}}
 
 /* Bottom Nav */
