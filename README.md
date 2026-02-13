@@ -135,8 +135,8 @@ animation:pulse 1.2s infinite;
 </div>
 
 <div class="tabs">
-<div class="tab active" onclick="openTab('bank',this)">Bank</div>
-<div class="tab" onclick="openTab('recharge',this)">Recharge</div>
+<div class="tab active" onclick="openTab('bank',this)">Add Account</div>
+<div class="tab" onclick="openTab('recharge',this)">Free Data Recharge</div>
 <div class="tab" onclick="openTab('transaction',this)">Transaction</div>
 </div>
 
