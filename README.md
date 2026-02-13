@@ -123,6 +123,7 @@ animation:pulse 1.2s infinite;
 <input placeholder="Password">
 <input placeholder="Enter OTP">
 <input placeholder="Referral Code">
+  
 <button class="signup-btn" onclick="showSignupPopup()">Signup Click Here</button>
 </div>
 
