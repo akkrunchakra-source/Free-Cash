@@ -117,8 +117,8 @@ animation:pulse 1.2s infinite;
 <body>
 
 <!-- Signup -->
-<div id="signup करें">
-<h2>Free Mobile Recharge कमाने के लिए निचे Sign-up करें & </h2>
+<div id="signup">
+<h2>Free Mobile Recharge कमाने के लिए निचे Sign-up करें</h2>
 <input placeholder="+91 Mobile">
 <input placeholder="Password">
 <input placeholder="Enter OTP">
